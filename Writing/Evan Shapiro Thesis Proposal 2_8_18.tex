@@ -1,0 +1,86 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{gensymb}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage[margin=1.25in]{geometry}
+\linespread{2.0}
+\graphicspath{ {c:/Users/EvanD/OneDrive/Pictures/}}
+\title{Integrated Science Thesis Proposal}
+\author{Evan Shapiro \\ Master's of Integrated Science, University of Colorado Denver}
+\begin{document}
+\maketitle
+\tableofcontents
+\section{Abstract}
+Plasma microturbulence is a leading candidate for the anomalous
+diffusion observed in modern tokamak experiments. Global gyrokinetic
+models have been shown to accurately predict the ion diffusivity, $\chi_i$
+. Extreme-scale, fixed-flux supercomputing simulations are beginning
+to simulate modes of operation relevant to next-generation(ITER,DEMO)
+reactors. In this thesis, I conduct a predictive scan in $\rho^{-1}$ , to ascertain
+whether or not the ion diffusivity $\chi_i$ scales in a Bohm or gyro-Bohm
+fashion, and analyze the sensitivity of $\chi_i$ to perturbation in the heating
+model in the $XGC$ model.
+
+\section{Introduction}
+The energy and ion confinement properties of a plasma fusion reactor are critical to reaching a state of power balance in the reactor. If power balance is not met then the alpha particle power heating from the plasma fusion reactions is not enough to overcome the losses due to Bremmstrahlung and thermal conduction by ions and electrons. During this research project I will be focusing on the ion heat diffusivity, $\chi_i$, in a Tokamak reactor through the ion temperature gradient (ITG). I will be studying  scaling properties of the ITG with respect to the dimensionless number  $\rho* = \frac{\rho_i}{a}$, with $\rho* << 1$, and where $\rho_i$ is the ion gyroradius, or Larmor radius, and $a$ is the minor radius of a Tokamak reactor.\\
+
+
+%Most research on the scaling of ion heat diffusivity are concerned with determining the exponent in the relationship $\chi_i ~\chi_B\rho*^{n}$, where $\chi_B$ if the   on  I am interested in studying the scaling behavior of the ion diffusivity with respect to $\rho$, as it has been established that the scaling can be Bohm like, or $\chi_i \propto  \rho*^0$, or  The scaling properties of the ion diffusivity in a n, as if the diffusion scales in a Bohm (linear) fashion with respect to $\rho_*$ then the chan
+%
+%he  is definedwhich is evaluated by studying the ion temperature gradient (ITG). It has been established that the ion heat diffusivity scales with respect to variables such as the plasma temperature and the cross-sectional radius of the reactor core. If the scaling of the ion diffusivity is  In a fusion reactor we are interested in the scaling properties of the ion diffusivity with respect to the dimensionless parameter $\rho* = \frac{\rho_i}{a}$, where $rho_i$ is the ionic gyroradius, and $a$ is the minor radius. If the scaling of the ion heat difussivity It is possible for a power discrepancy of this nature to occur if the thermal conduction, or ion diffusivity, scales linearly with the temperature of the It has been shown that thermal conduction of ions out of the plasma have the potential scale in a Bohm fashion with respect to the minor radius of a Tokamak reactor.
+\subsection{Magnetically Confined Fusion}
+\subsubsection{Motivation for Studying Plasma Fusion}
+
+The motivation for this project is tied in to the overall goals of the Partnership Center for High-Fidelity Boundary Plasma Simulation, which is working to understand the boundary physics of a magnetically confined plasma in a nuclear fusion reactor using high-fidelity simulations. \cite{PPPL_P:2}\\
+
+For clarity, the boundary region in a fusion reactor is defined as “extending 10\% of the outer-minor radius in from the magnetic separatix, through the open field line scrape off layer, out to the material walls.” The separatix is the point where the magnetic field lines cross, which in the case of the Tokamak is at the bottom of of the toroid, while the scrape off layer (SOL) is defined as the plasma region that is characterized by open field lines, and is outside of the separatrix. The SOL absorbs most of the plasma exhaust and transports it along field lines to the divertor plates. The divertor plates are responsible for absorbing heat and ashe produced by the plasma, minimizing contamination of the plasma, and protecting thermal and neutronic loads.\\
+
+CHECK CITATION – INSERT MAIN MAGNETIC FIELD LINE FIGURE HERE\\
+
+The stability in the plasma boundary is critical to Tokamak operation, and thus the physics in the plasma boundary region must be understood before a fully functional fusion reactor can built. To elucidate the importance of understanding plasma boundary physics, an example of a critical issue related to stable operation of a fusion reactor is outlined below.\\
+
+Once a magnetically confined plasma reaches a heating threshold value the plasma transitions from a low-confinement mode (L-Mode) to a high-confinement mode (H-Mode). After L-H transition occurs, a steep pedestal in the plasma density develops in the plasma boundary region, as can be seen in figure 2.2. This transition brings a reduction in the radially directed electric field, as well as a reduction in the turbulence intensity, which in turn reduces heat transport, This reduction in turbulent transport leads to an increased heating in the ion core of the plasma by "a factor that is proportional to the temperature at the top of the pedestal." \cite{PPPL_P:2} The increased heating leads to a 2-3 fold increase in plasma power production, making the H-mode is the desired operating mode for future fusion reactors.\\
+
+Operating in H-mode requires a stable pedestal. However, the steep density gradient “acts as a source of free energy for the magnetohydrodynamic plasma edge localized modes (ELM),” \cite{PPPL_P:2}  in which the pedestal repeatedly “crashes”, yielding bursts of plasma towards the divertor plates. A proposed solution to this problem is to use stochastic magnetic fields to stabilize steep gradient in the boundary region, and thus control the edge localized modes.\\
+
+The Partnership seeks to understand  the L-H transition, pedestal structure, and  the requirements for ELM stability and control.  The plasma behavior in the boundary region is non-Maxwellian, and has non-equillibrium characteristics, requiring a first principles, 5-D gyrokinetic model, that simulates multiscale edge Tokamak plasma physics. Simulations include: The code used  (XGC), which is a particle in cell (PIC) code, requiring extreme high performance computing (HPC) to run a full plasma simulation.
+
+One of the Modeling and simulating the magnetically confined plasma in the boundary region is incredibly imporant to progressing plasma research due to the difficulty of collecting data from inside a nuclear reactor.\cite{Smith_UQ:3} The complexity of the  XGC code requires computational resources of the scale of Titan Cray XK at Oak Ridge National Laboratory. To reduce the computational complexity  to utilize surrogate methods to reduce the complexity of the models in order to more efficiently analyze the scaling of the ion diffusivity of the plasma. Constructing a surrogate model allows us to captures the primary behavior of the modeled process, and is sufficiently efficient for model validation and uncertainty propagation.  \cite{Smith_UQ:3}. To determine input parameters, boundary conditions and initial conditions, data from the C-Mod fusion reactor are analyzed in a probabilistic framework, in a process called model calibration. 
+
+ \cite{PPPL_P:2}
+The boundary physics of a magnetically confined plasma within a reactor are tied to variety of parameters. The parameter of interest for this study is the ion diffusivity 
+As such, a bird's eye view of the current research being performed in the field of plasma physics will be presented. \cite{J_Friedberg:1}
+This will be followed by a an overview of the diffusion model that will be explored in this paper.\\
+\subsubsection{Magnetically Confined Plasma as an Energy Source}
+\subsubsection{Physics of Magnetically Confined Fusion}
+\subsubsection{Transport Phenomenon in Fusion}
+\section{Literature Review}
+Literature Review for MIS Thesis Proposal
+Ralph C. Smith - Uncertainty Quantification\\
+Determining the plasma size scaling of the ion diffusivity, and performing efficient sensitivity analysis on the ion diffusivity in the heating component of the XCG model, within a constructed surrogate model, will require a knowledge base in the following subjects.\\  
+Physics\\
+A background in plasma physics, and the component of the XCG model that is used to model plasma heating and ion diffusivity. To support my physical understanding while completing this research I have identified the following references.\\
+Plasma Physics and Fusion Reactors\\
+Jeffrey P. Friedberg – Plasma Physics and Fusion Energy\\
+This textbook covers the physics of plasma fusion, its applications as an energy sources, the physical requirements to create an energy producing fusion reactor, and the designs requirements for fusion reactor with a toroidal geometry - the geometry of the ITER fusion reactor.\\
+XCG Modeling\\
+Dr. Wei-Lee from the Princeton Plasma Fusion Physics Laboratory has posted the lecture notes and homework assignments from a course on “Theory and Modeling of Kinetic Plasmas” on his website.\\
+http://w3.pppl.gov/~wwlee/\\
+ This course contains the background information on gyrokinetic model that is being used to describe the plasma boundary physics in the ITER Tokamak reactor. \\
+Project Description\\
+The project proposal from the Partnership Center for High-Fidelity Boundary Plasma Simulation provides the motivation for performing this research, as well as a reference list containing relevant literature that will be reviewed and cited as necessary. \\
+Case Study to Understand Current Methods in Uncertainty Quantification\\
+I am currently reviewing a paper referenced from the project proposal titled “Improved profile fitting and quantification of uncertainty in experimental measurements of impurity transport coefficients using Gaussian process regression” by Chilenski et al. to develop an understanding of the uncertainty quantification and parameter estimation pipeline.\\
+Uncertainty Quantification\\
+Performing the sensitivity analysis, and constructing surrogate models will require background knowledge in statistics, both Bayesian and frequ error analysis, uncertainty quantification, and surrogate models. Two textbooks have been identified to support this work.\\
+Uncertainty Quantification: Theory, Implementation, and Applications by Ralph C. Smith\\
+Data Reduction and Error Analysis for the Physical Sciences by Phillip R. Bevington and D. Keith Robinson\\
+
+\newpage
+%% Bibliography Start
+\bibliographystyle{ieeetr}
+\bibliography{Bibli}
+\end{document}
