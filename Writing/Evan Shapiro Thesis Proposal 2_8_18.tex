@@ -19,20 +19,40 @@ diffusion observed in modern tokamak experiments. Global gyrokinetic
 models have been shown to accurately predict the ion diffusivity, $\chi_i$
 . Extreme-scale, fixed-flux supercomputing simulations are beginning
 to simulate modes of operation relevant to next-generation(ITER,DEMO)
-reactors. In this thesis, I conduct a predictive scan in $\rho^{-1}$ , to ascertain
+reactors. Using a surrogate model to reduce computational expense, I conduct a predictive scan
+in $\rho^{-1}$ , to ascertain
 whether or not the ion diffusivity $\chi_i$ scales in a Bohm or gyro-Bohm
 fashion, and analyze the sensitivity of $\chi_i$ to perturbation in the heating
 model in the $XGC$ model.
 
 \section{Introduction}
-The energy and ion confinement properties of a plasma fusion reactor are critical to reaching a state of power balance in the reactor. If power balance is not met then the alpha particle power heating from the plasma fusion reactions is not enough to overcome the losses due to Bremmstrahlung and thermal conduction by ions and electrons. During this research project I will be focusing on the ion heat diffusivity, $\chi_i$, in a Tokamak reactor through the ion temperature gradient (ITG). I will be studying  scaling properties of the ITG with respect to the dimensionless number  $\rho* = \frac{\rho_i}{a}$, with $\rho* << 1$, and where $\rho_i$ is the ion gyroradius, or Larmor radius, and $a$ is the minor radius of a Tokamak reactor.\\
+The energy and ion confinement properties of a magnetically confined plasma are critical to reaching a state of power balance in a fusion reactor reactor. If power balance is not met then the alpha particle power heating from the plasma fusion reactions is not enough to overcome the losses due to Bremmstrahlung and thermal conduction by ions and electrons \cite{J_Friedberg:1}. It is known that the ion diffusivity in Tokamak reactors stellarators has a time scale that can not be explained solely by Coulomb interactions \cite{Gyro_Petty}.  It has been postulated that plasma turbulence is responsible for the non-Coulombic thermal conductivity, however due to the complexity of modeling turbulence other methods have been used to understand how the ion temperature gradient scales with reactor size.\\
 
+Developing a theory and model of plasma turbulence would allow us to understand how ion diffusivity scales with reactor size, which is critically important when transitioning from a test reactor to an ITER or DEMO sized reactor. However, the computational complexity of such a task has encouraged clever dimensionless scaling arguments to be used to study the scaling behavior. Prior research \cite{Yas_Ido}  has focused on the scaling relationship between the ion thermal diffusivity, $\chi_i$, and the dimensionless variable  $\frac{\rho_i}{a}$,  where $\rho_i$ is the ion gyroradius, or Larmor radius, and $a$ is the minor radius of a Tokamak reactor;  it can be seen that  $\frac{\rho_i}{a}<<1$.\\
 
-%Most research on the scaling of ion heat diffusivity are concerned with determining the exponent in the relationship $\chi_i ~\chi_B\rho*^{n}$, where $\chi_B$ if the   on  I am interested in studying the scaling behavior of the ion diffusivity with respect to $\rho$, as it has been established that the scaling can be Bohm like, or $\chi_i \propto  \rho*^0$, or  The scaling properties of the ion diffusivity in a n, as if the diffusion scales in a Bohm (linear) fashion with respect to $\rho_*$ then the chan
+Of interest is whether the ion diffusivity scaling is Bohm-like, or scales linearly with temperature, or gyro-Bohm like, scaling sublinearly with temperature.\\
+
+Previous studies on the relationship between ion diffusivity and reactor size have been completed in a reduced scale geometry \cite{Yas_Ido}, leaving
+
+% Go through details on push forward scanning using a surrogate model.
+
+The relationship between ion diffusivity, $\chi_i$, and the dimensionless radius $\rho*$ is given by
+$$
+\chi_i = (cT_e/|e|B )\rho*^{x_p}F(v_*, \beta, q_{\phi}, T_e/T_i, ...).
+$$
+
+The first coefficient is the Bohm diffusitivity function, where $c$ is the speed of light in the plasma, $T_e$ is the electron temperature $e$ is the electron charge, and B is the perpendicular magnetic field. The second coefficient contains the dimensionless radius, where the exponent $x_p$ determines the scaling of the ion diffusivity with respect to the dimensionless radius. The third coefficient is the dimensinless group formed by all of the relevant parameters.\\
+
+In this thesis I want to determine the scaling behavior of $\chi_i$ with respect to $\rho_*$ by performing a scan in $\rho_*$ using a surrogate model. The reason for using a surrogate model is that the full-f gyrokinetic model that is used to model the behavior of the plasma is computationally expensive, requiring extreme scale HPC power, like the Titan supercomputer at Oak Ridge National Laboratories.
 %
+%  During this research project I will be focusing on the ion heat diffusivity, $\chi_i$, in a Tokamak reactor through the ion temperature gradient (ITG). I will be studying  scaling properties of the ITG with respect to the dimensionless number  $\rho* = \frac{\rho_i}{a}$, with $\rho* << 1$, and where $\rho_i$ is the ion gyroradius, or Larmor radius, and $a$ is the minor radius of a Tokamak reactor.\\
+
+
+Most research on the scaling of ion heat diffusivity is concerned with determining the exponential relationship between,  $\chi_i$ and $\chi_B\rho*^{n}$. $\chi_B = $ Bohm diffusivity function if the   on  I am interested in studying the scaling behavior of the ion diffusivity with respect to $\rho$, as it has been established that the scaling can be Bohm like, or $\chi_i \propto  \rho*^0$, or  The scaling properties of the ion diffusivity in a n, as if the diffusion scales in a Bohm (linear) fashion with respect to $\rho_*$ then the chan
+
 %he  is definedwhich is evaluated by studying the ion temperature gradient (ITG). It has been established that the ion heat diffusivity scales with respect to variables such as the plasma temperature and the cross-sectional radius of the reactor core. If the scaling of the ion diffusivity is  In a fusion reactor we are interested in the scaling properties of the ion diffusivity with respect to the dimensionless parameter $\rho* = \frac{\rho_i}{a}$, where $rho_i$ is the ionic gyroradius, and $a$ is the minor radius. If the scaling of the ion heat difussivity It is possible for a power discrepancy of this nature to occur if the thermal conduction, or ion diffusivity, scales linearly with the temperature of the It has been shown that thermal conduction of ions out of the plasma have the potential scale in a Bohm fashion with respect to the minor radius of a Tokamak reactor.
-\subsection{Magnetically Confined Fusion}
-\subsubsection{Motivation for Studying Plasma Fusion}
+
+\section{Motivation for Performing Study}
 
 The motivation for this project is tied in to the overall goals of the Partnership Center for High-Fidelity Boundary Plasma Simulation, which is working to understand the boundary physics of a magnetically confined plasma in a nuclear fusion reactor using high-fidelity simulations. \cite{PPPL_P:2}\\
 
@@ -82,5 +102,67 @@ Data Reduction and Error Analysis for the Physical Sciences by Phillip R. Beving
 \newpage
 %% Bibliography Start
 \bibliographystyle{ieeetr}
-\bibliography{Bibli}
+\bibliography{Bibli_2}
 \end{document}
+%%
+%@book{J_Friedberg:1,
+%	address = {New York},
+%	edition = {1st},
+%	title = {Plasma {Physics} and {Fusion} {Energy}},
+%	isbn = {978-0-511-27375-9},
+%	language = {English},
+%	publisher = {Cambridge University Press},
+%	author = {{Jeffrey P. Friedberg}},
+%	year = {2007}
+%}
+%
+%@book{carl_edward_rasmussen_gaussian_2006,
+%	title = {Gaussian {Processes} for {Machine} {Learning}},
+%	isbn = {0-262-18253-X},
+%	language = {English},
+%	publisher = {MIT Press},
+%	author = {{Carl Edward Rasmussen} and {Christopher K.I. Williams}},
+%	year = {2006},
+%	file = {Gaussian Processes for Machine Learning.pdf:C\:\\Users\\EvanD\\OneDrive\\Documents\\MIS Thesis\\Papers and Textbooks\\Gaussian Processes for Machine Learning.pdf:application/pdf}
+%}
+%
+%@misc{PPPL_P:2,
+%	title = {Partnership {Center} for {High}-{Fidelity} {Boundary} {Plasma} {Simulation} {Project} {Proposal}},
+%	language = {English},
+%	publisher = {Princeton},
+%	author = {{Choong-Seock Chang et al}},
+%	year = {2017}
+%}
+%
+%
+%
+%@article{m.a._chilenski_et_al_improved_2015,
+%	title = {Improved profile fitting and quantification of uncertainty in experimental measurements of impurity transport coefficients using {Gaussian} process regression},
+%	volume = {55},
+%	number = {023012},
+%	journal = {Nucl. Fusion},
+%	author = {{M.A. Chilenski et al}},
+%	year = {2015},
+%	pages = {21},
+%	file = {UQ_Impurity_Transport_Coefficients_GCR_Chilenski.pdf:C\:\\Users\\EvanD\\OneDrive\\Documents\\MIS Thesis\\Papers and Textbooks\\UQ_Impurity_Transport_Coefficients_GCR_Chilenski.pdf:application/pdf}
+%}
+%
+%@techreport{benjamin_peherstorfer_survey_2016,
+%	title = {{SURVEY} {OF} {MULTIFIDELITY} {METHODS} {IN} {UNCERTAINTY} {PROPAGATION}, {INFERENCE}, {AND} {OPTIMIZATION}},
+%	url = {http://web.mit.edu/pehersto/www/preprints/multi-fidelity-survey-peherstorfer-willcox-gunzburger.pdf},
+%	institution = {MIT.edu},
+%	author = {{Benjamin Peherstorfer} and {Karen Willcox} and {Max Gunzburger}},
+%	month = jun,
+%	year = {2016},
+%	pages = {57},
+%	file = {multi-fidelity-survey-peherstorfer-willcox-gunzburger.pdf:C\:\\Users\\EvanD\\OneDrive\\Documents\\MIS Thesis\\Papers and Textbooks\\multi-fidelity-survey-peherstorfer-willcox-gunzburger.pdf:application/pdf}
+%}
+%@book{Smith_UQ:3,
+%	title ={Uncertinaty Quantification - Theory, Implementation, and Applications},
+%	isbn = {978-1-611973-21-1},
+%	language = {English},
+%	publisher = {Society of Industrial and Applied Mathematics},
+%	author = {Ralph C. Smith},
+%	year = {2014}
+%}
+%%
