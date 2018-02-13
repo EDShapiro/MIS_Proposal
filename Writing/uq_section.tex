@@ -1,0 +1,80 @@
+%
+% Overview of the Problem
+%
+
+Prediction under uncertainty is often an expensive and complicated process\cite{odensiam1,odensiam2}.
+The tradeoff between the computational cost of complex models and the loss of predictive accuracy 
+associated with simpler models may be addressed by emerging multifidelity UQ approaches\cite{ngmulti,Pehermulti}.
+
+In magnetic confinement fusion, there is an important, clearly defined set of prediction scenarios, corresponding 
+to modelling future reactor(ITER/DEMO) performance.  Even a ``high-fidelity'', extreme-scale model such as XGC, still
+has a parameter space of large enough dimension to make a brute-force, 
+sampling-based predictive process
+impossible.  
+%The $N^{-1/2}$ convergence, where $N$ is the number of samples of the quantity of interest(QOI), is infeasible given the requirements on computational resources. 
+The traditional approach to prediction, with or without extrapolation, is to sample the model parameter input space
+$\theta=\theta_1,\theta_2, \ldots, \theta_d$, evaluate the model, and return a quantity of interest (QoI) $Q(\theta)$.
+Most realistic QoI maps are nonlinear in the QoI map(even if the governing PDE is linear), 
+so the probability distribution function(PDF) of $Q(\theta)$ will
+have to be estimate in a non-parametric way, typically
+ by kernel density estimation, or by computing empirical 
+statistics from samples.
+The mean-integrated squared error
+of the approximate PDF converges with a rate of $\mathcal{O}(N^{-2/(d+4)})$, where $N$ is the number of samples of the model
+and $d$ is the dimension of the input space.  As each sample typically involves a PDE solve and subsequent post-processing,
+this process quickly becomes exorbitantly expensive.  
+
+\subsection{Surrogate Models}
+
+A surrogate model replaces the large cost of the model solve 
+with a fast, explicit function evaluation.  The surrogate model
+is constructed via interpolation or regression on a modest number 
+of potentially deterministic traning samples $M$.  The
+error from insufficient samples in the kernel density estimation is exchanged for the error between the true QoI $Q(\theta)$ and surrogate QoI $Q_S(\theta)$\cite{butler2013propagation}.
+Sparse grid approaches \cite{bungartz2004,Jakeman2011LocalAD} give roughly the same error(modulo a factor of $n^{d-1}$, where $d$ is the dimension of the (input) parameter space and $n$ is the number of
+training points)) as traditional tensor-product surrogates.
+However, the number of samples is  $\mathcal{O}(2^n n^{d-1})$, instead of the full grid cost of $\mathcal{O}(2^{nd})$.  
+These savings and accuracy can potentailly be increased by adopting adaptive sparse grid surrogates\cite{bungartz2004}.
+
+In predictive extrapolation, the target scenario for $Q(\theta)$ is often sufficiently expensive to even make the surrogate 
+approach tenuous.   One strategy in this
+situation is to construct the surrogate using a sequence of lower-fidelity models to construct $\tilde{Q}(\theta)$, and then train the surrogate\cite{Pehermulti}.  This often requires
+a good characterization of the error between $Q(\theta)$ and $\tilde{Q}(\theta)$.  This is not a well-explored or understood area in the kinetic plasma PIC community.  
+
+Another approach is to add deterministic parameters that describes ``nearby'' scenarios,
+s.t. $Q(\theta)=A(\theta,k_1,k_2,\ldots,k_r)$, $k_i$ fixed.  We call the determanistic parameters $k_i$ augmentation parameters, and the surrogate model
+$A_S$ of $A$, the augmented surrogate.  Moderate gains are achieved when the number of augmentation parameters is small and the cost of sampling $A$ outside of the prediction
+scenario $Q$ is much cheaper.  If the gradient of $A$ with respect to $\theta$ is only weakly dependent on the augmentation parameters, 
+significant (cost-based) accuracy savings can be achieved.  
+
+There are two fundmental assumptions in the construction of an augmented surrogate of
+a $n$-dimensional predictive scenario $Q(\theta_1,\theta_2,\ldots,\theta_n)$.
+\begin{enumerate}
+\item There exists small number $m$ of (usually deterministic) parameters $d_1,d_2,\ldots,d_m$ that characterize
+nearby $n$-dimensional predictive scenarios $\tilde{Q}_i(\theta_1,\theta_2,\ldots,\theta_n)$.
+\item The cost of a sample from the nearby scenario, $C_{\tilde{Q}_i}$, is much less than the cost $C_Q$ of 
+a sample from the desired prediction scenario.
+\end{enumerate} 
+
+The {\em augmented surrogate} is a surrogate model $A(\theta,d)$ constructed on training data $\{(\theta,d),\hat{Q}(\theta,d)\}$ in the $m+n$-dimensional
+parameter space.   %We briefly illustrate this approach via the following numerical cartoon.
+
+\subsubsection*{Adaptive sparse grid method}  
+The classical sparse grid method is dimension agnostic\cite{bungartz2004}. All interactions
+of the same order are treated equally. Often, a small subset of variables
+and interactions contributes significantly to the variability of the function $Q(\theta,d)$.  If the variability in the $\theta$-dimensions is
+greater than the variability in the scenario parameters($\{d_i\}$) then the overall cost of constructing the 
+larger dimensional surrogate is actually less, due to the cheaper computational cost of $\tilde{Q}_i$.
+
+We modify the 
+greedy algorithm for constructing $h$-adaptive generalized sparse grid (h-GSG) in \cite{Jakeman2011LocalAD}.
+The hierarchical surpluses for the current sparse grid are modified with a cost weight $W_C(d_1,d_2,\ldots,d_m)$ that approximates the relative
+cost of simulating the added sparse grid point, and a $m$-dimensional distance metric that penalizes sparse grid
+samples that are too far away from the prediction scenario $Q(\theta)$.  This encourages parameter exploration in $\theta_i$-dimensions at
+inexpensive simulation levels, while rewarding coarse grid points that reduce the local surrogate error near the prediction scenario $Q(\theta)$.  
+
+
+ 
+
+
+ 
