@@ -11,19 +11,25 @@
 \title{Integrated Science Thesis Proposal}
 \author{Evan Shapiro \\ Master's of Integrated Science, University of Colorado Denver}
 \begin{document}
-\maketitle
-\tableofcontents
-\section{Abstract}
-Plasma microturbulence is a leading candidate for the anomalous
-diffusion observed in modern tokamak experiments. Global gyrokinetic
+
+
+\begin{abstract}
+Plasma microturbulence is a leading candidate of the source
+%for the anomalous
+of anomalous diffusion observed in %modern 
+tokamak experiments. Global gyrokinetic
 models have been shown to accurately predict the ion diffusivity, $\chi_i$
 . Extreme-scale, fixed-flux supercomputing simulations are beginning
 to simulate modes of operation relevant to next-generation(ITER,DEMO)
-reactors. Using a surrogate model to reduce computational expense, I conduct a predictive scan
+reactors. Using a surrogate model to reduce the computational expense of XGC simulations, I conduct a predictive scan
 in $\rho^{-1}$ , to ascertain
 whether or not the ion diffusivity $\chi_i$ scales in a Bohm or gyro-Bohm
 fashion, and analyze the sensitivity of $\chi_i$ to perturbation in the heating
-model in the $XGC$ model.
+model.% in the $XGC$ model.
+\end{abstract}
+
+\maketitle
+\tableofcontents
 
 \section{Introduction}
 \subsection{Fusion Energy as a Potential Source of Electricity}
@@ -76,6 +82,10 @@ In this thesis I want to determine the scaling behavior of $\chi_i$ with respect
 Most research on the scaling of ion heat diffusivity is concerned with determining the exponential relationship between,  $\chi_i$ and $\chi_B\rho*^{n}$. $\chi_B = $ Bohm diffusivity function if the   on  I am interested in studying the scaling behavior of the ion diffusivity with respect to $\rho$, as it has been established that the scaling can be Bohm like, or $\chi_i \propto  \rho*^0$, or  The scaling properties of the ion diffusivity in a n, as if the diffusion scales in a Bohm (linear) fashion with respect to $\rho_*$ then the chan
 
 %he  is definedwhich is evaluated by studying the ion temperature gradient (ITG). It has been established that the ion heat diffusivity scales with respect to variables such as the plasma temperature and the cross-sectional radius of the reactor core. If the scaling of the ion diffusivity is  In a fusion reactor we are interested in the scaling properties of the ion diffusivity with respect to the dimensionless parameter $\rho* = \frac{\rho_i}{a}$, where $rho_i$ is the ionic gyroradius, and $a$ is the minor radius. If the scaling of the ion heat difussivity It is possible for a power discrepancy of this nature to occur if the thermal conduction, or ion diffusivity, scales linearly with the temperature of the It has been shown that thermal conduction of ions out of the plasma have the potential scale in a Bohm fashion with respect to the minor radius of a Tokamak reactor.
+
+\section{Prediction under Uncertainty}
+\input{uq_section}
+
 
 \section{Motivation for Performing Study}
 
