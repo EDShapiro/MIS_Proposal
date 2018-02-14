@@ -36,6 +36,8 @@ training points)) as traditional tensor-product surrogates.
 However, the number of samples is  $\mathcal{O}(2^n n^{d-1})$, instead of the full grid cost of $\mathcal{O}(2^{nd})$.  
 These savings and accuracy can potentailly be increased by adopting adaptive sparse grid surrogates\cite{bungartz2004}.
 
+\subsubsection*{Augmented Surrogates}
+
 In predictive extrapolation, the target scenario for $Q(\theta)$ is often sufficiently expensive to even make the surrogate 
 approach tenuous.   One strategy in this
 situation is to construct the surrogate using a sequence of lower-fidelity models to construct $\tilde{Q}(\theta)$, and then train the surrogate\cite{Pehermulti}.  This often requires
@@ -72,6 +74,17 @@ The hierarchical surpluses for the current sparse grid are modified with a cost 
 cost of simulating the added sparse grid point, and a $m$-dimensional distance metric that penalizes sparse grid
 samples that are too far away from the prediction scenario $Q(\theta)$.  This encourages parameter exploration in $\theta_i$-dimensions at
 inexpensive simulation levels, while rewarding coarse grid points that reduce the local surrogate error near the prediction scenario $Q(\theta)$.  
+
+\subsection{Proposed UQ Study}
+We will conduct a base parameter scan in $(\rho_*)$, at the mean values of the uncertain inputs.  This will verify that wedge, Eulerian versus PIC, or other factors do not impact the conclusions reached in \cite{Yas_Ido}.  This scan will also provide the first training runs for
+the augmented surrogate $A$.  
+
+Data from a range of $\rho^{-1}_*$ simulations will be obtained in the interval (100,600) will be provided by Varis Carey and other members
+of the BPS Scidac team  from simulations run at NERSC and Oak Ridge facilites.  A budget of 20,000 SU at NERSC has been allocated for providing the data for this scaling study(which is already partially complete at the time of this proposal)
+ and for additional simulations to train the augmented surrogate to cover the input parameter space.
+The main input parameters parameterize the location, slope, and shape of the core heat source and boundary sink.  Additional parameters covering
+torque will be allowed if the computational budget allows further investigation.  If NERSC resources are expended, certain (small-scale)
+simulations will be conducted on CU-Denver or RMCC resources(Summit) under the supervision of Varis Carey.
 
 
  
