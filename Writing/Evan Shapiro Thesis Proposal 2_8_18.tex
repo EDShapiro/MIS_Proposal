@@ -13,17 +13,31 @@
 \title{Integrated Science Thesis Proposal}
 \author{Evan Shapiro \\ Master's of Integrated Science, University of Colorado Denver}
 \begin{document}
+<<<<<<< HEAD
 \section{Abstract}
 Plasma microturbulence is a leading candidate for the anomalous
 diffusion observed in modern tokamak experiments. Global gyrokinetic
+=======
+
+
+\begin{abstract}
+Plasma microturbulence is a leading candidate of the source
+%for the anomalous
+of anomalous diffusion observed in %modern 
+tokamak experiments. Global gyrokinetic
+>>>>>>> 6f21f4ca132eabe95ad55dea398ef4f20d0aadf1
 models have been shown to accurately predict the ion diffusivity, $\chi_i$
 . Extreme-scale, fixed-flux supercomputing simulations are beginning
 to simulate modes of operation relevant to next-generation(ITER,DEMO)
-reactors. Using a surrogate model to reduce computational expense, I conduct a predictive scan
+reactors. Using a surrogate model to reduce the computational expense of XGC simulations, I conduct a predictive scan
 in $\rho^{-1}$ , to ascertain
 whether or not the ion diffusivity $\chi_i$ scales in a Bohm or gyro-Bohm
 fashion, and analyze the sensitivity of $\chi_i$ to perturbation in the heating
-model in the $XGC$ model.
+model.% in the $XGC$ model.
+\end{abstract}
+
+\maketitle
+\tableofcontents
 
 \maketitle
 \tableofcontents
@@ -154,6 +168,7 @@ $A_S$ of $A$, the augmented surrogate.  Moderate gains are achieved when the num
 scenario $Q$ is much cheaper.  If the gradient of $A$ with respect to $\theta$ is only weakly dependent on the augmentation parameters, 
 significant (cost-based) accuracy savings can be achieved.  
 
+<<<<<<< HEAD
 There are two fundmental assumptions in the construction of an augmented surrogate of
 a $n$-dimensional predictive scenario $Q(\theta_1,\theta_2,\ldots,\theta_n)$.
 \begin{enumerate}
@@ -162,6 +177,13 @@ nearby $n$-dimensional predictive scenarios $\tilde{Q}_i(\theta_1,\theta_2,\ldot
 \item The cost of a sample from the nearby scenario, $C_{\tilde{Q}_i}$, is much less than the cost $C_Q$ of 
 a sample from the desired prediction scenario.
 \end{enumerate} 
+=======
+\section{Prediction under Uncertainty}
+\input{uq_section}
+
+
+\section{Motivation for Performing Study}
+>>>>>>> 6f21f4ca132eabe95ad55dea398ef4f20d0aadf1
 
 The {\em augmented surrogate} is a surrogate model $A(\theta,d)$ constructed on training data $\{(\theta,d),\hat{Q}(\theta,d)\}$ in the $m+n$-dimensional
 parameter space.   %We briefly illustrate this approach via the following numerical cartoon.
@@ -322,5 +344,9 @@ Data Reduction and Error Analysis for the Physical Sciences by Phillip R. Beving
 %	author = {Ralph C. Smith},
 %	year = {2014}
 %}
+<<<<<<< HEAD
 
 %%
+=======
+%%
+>>>>>>> 6f21f4ca132eabe95ad55dea398ef4f20d0aadf1
