@@ -76,11 +76,12 @@ samples that are too far away from the prediction scenario $Q(\theta)$.  This en
 inexpensive simulation levels, while rewarding coarse grid points that reduce the local surrogate error near the prediction scenario $Q(\theta)$.  
 
 \subsection{Proposed UQ Study}
-We will conduct a base parameter scan in $(\rho_*)$, at the mean values of the uncertain inputs.  This will verify that wedge, Eulerian versus PIC, or other factors do not impact the conclusions reached in \cite{Yas_Ido}.  This scan will also provide the first training runs for
+We will conduct a base parameter scan in $(\rho_*)$, at the mean values of the uncertain inputs.  
+This will verify that wedge, Eulerian versus PIC, or other factors do not impact the conclusions reached in \cite{Yas_Ido}.  This scan will also provide the first training runs for
 the augmented surrogate $A$.  
 
-Data from a range of $\rho^{-1}_*$ simulations will be obtained in the interval (100,600) will be provided by Varis Carey and other members
-of the BPS Scidac team  from simulations run at NERSC and Oak Ridge facilites.  A budget of 20,000 SU at NERSC has been allocated for providing the data for this scaling study(which is already partially complete at the time of this proposal)
+Data from a range of $\rho^{-1}_*$ simulations in the interval (100,600) will be provided by Varis Carey and other members
+of the HBPS Scidac team  from supercomputer simulations run at NERSC and Oak Ridge facilites.  A budget of 20,000 SU at NERSC has been allocated for providing the data for this scaling study(which is already partially complete at the time of this proposal)
  and for additional simulations to train the augmented surrogate to cover the input parameter space.
 The main input parameters parameterize the location, slope, and shape of the core heat source and boundary sink.  Additional parameters covering
 torque will be allowed if the computational budget allows further investigation.  If NERSC resources are expended, certain (small-scale)
@@ -88,7 +89,8 @@ simulations will be conducted on CU-Denver or RMCC resources(Summit) under the s
 
 \subsubsection*{Postprocessing Software}
 Postprocessing software (python and Matlab) are available to extract plasma QoI from  XGC 2D and 1D diagnostic output.  The BPS team will
-arrange a NERSC account to avoid transfer of large binary files and allow simulation data to be repurposed for future studies. 
+arrange a NERSC account for Evan to avoid transfer of large binary files and allow simulation data to be repurposed for serving the 
+plasma fusion community.
 
 Evan: you won't be expected to do any major software development(mainly just modify some scripts, maybe improve them) as part of this project.
 

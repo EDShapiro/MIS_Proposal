@@ -13,9 +13,12 @@
 \title{Integrated Science Thesis Proposal}
 \author{Evan Shapiro \\ Master's of Integrated Science, University of Colorado Denver}
 \begin{document}
+<<<<<<< HEAD
 
 %<<<<<<< HEAD
 
+=======
+>>>>>>> 7743f98897ec0e1a10dda70ead44275893739ee7
 
 \begin{abstract}
 Plasma microturbulence is a leading candidate of the source
@@ -112,71 +115,19 @@ We define $\rho^*$ to be $\rho^* = \rho_i/a$ where $\rho_i$ is the gyrokinetic r
 Thus, the stated purpose of this thesis is to determine how the ionic thermal diffusivity scales with a scan in $\rho^*$ up to ITER scales, to determine whether the diffusion becomes Bohm or gyro-Bohm like. Bohm diffusion indicates that the diffusin increases linearly with temperature, and is undesireable, while gyro-Bohm diffusion indicates that the  diffusion scales sublinearly with temperature, and is desireable.
 %%Add More Detail Above
 
-We will use available fusion reactor data, and implement surrogate modeling techniques to reduce the computational expense of running a simulation of t5-D full-fidelity gyrokinetic model. The outcome of this project will be a pdf of the ion diffusion, with uncertainties. Once this is accomplished, if time permits, we will perform a push forward sensitivity analysis, by perturbing $\chi_i$ within the the full 5-D heating model.\\ 
+%%This may be redundant with later material
+
+We will use available experimental fusion reactor data, and implement surrogate modeling techniques to reduce the computational expense of running a simulation of 5-D high-fidelity gyrokinetic model. The outcome of this project will be a pdf of the ion diffusion, with uncertainties. Once this is accomplished, if time permits, we will perform a %push forward 
+comprehensive sensitivity analysis of the heating model.
 
 \subsection{Gyrokinetic Equations}
 \subsection{XGC Code \& Heating Models}
 \section{Experimental Metholodogy}
-Prediction under uncertainty is often an expensive and complicated process\cite{odensiam1,odensiam2}.
-The tradeoff between the computational cost of complex models and the loss of predictive accuracy 
-associated with simpler models may be addressed by emerging multifidelity UQ approaches\cite{ngmulti,Pehermulti}.
 
-In magnetic confinement fusion, there is an important, clearly defined set of prediction scenarios, corresponding 
-to modelling future reactor(ITER/DEMO) performance.  Even a ``high-fidelity'', extreme-scale model such as XGC, still
-has a parameter space of large enough dimension to make a brute-force, 
-sampling-based predictive process
-impossible.  
-%The $N^{-1/2}$ convergence, where $N$ is the number of samples of the quantity of interest(QOI), is infeasible given the requirements on computational resources. 
-The traditional approach to prediction, with or without extrapolation, is to sample the model parameter input space
-$\theta=\theta_1,\theta_2, \ldots, \theta_d$, evaluate the model, and return a quantity of interest (QoI) $Q(\theta)$.
-Most realistic QoI maps are nonlinear in the QoI map(even if the governing PDE is linear), 
-so the probability distribution function(PDF) of $Q(\theta)$ will
-have to be estimate in a non-parametric way, typically
- by kernel density estimation, or by computing empirical 
-statistics from samples.
-The mean-integrated squared error
-of the approximate PDF converges with a rate of $\mathcal{O}(N^{-2/(d+4)})$, where $N$ is the number of samples of the model
-and $d$ is the dimension of the input space.  As each sample typically involves a PDE solve and subsequent post-processing,
-this process quickly becomes exorbitantly expensive.  
-
-\subsection{Surrogate Models}
-
-A surrogate model replaces the large cost of the model solve 
-with a fast, explicit function evaluation.  The surrogate model
-is constructed via interpolation or regression on a modest number 
-of potentially deterministic traning samples $M$.  The
-error from insufficient samples in the kernel density estimation is exchanged for the error between the true QoI $Q(\theta)$ and surrogate QoI $Q_S(\theta)$\cite{butler2013propagation}.
-Sparse grid approaches \cite{bungartz2004,Jakeman2011LocalAD} give roughly the same error(modulo a factor of $n^{d-1}$, where $d$ is the dimension of the (input) parameter space and $n$ is the number of
-training points)) as traditional tensor-product surrogates.
-However, the number of samples is  $\mathcal{O}(2^n n^{d-1})$, instead of the full grid cost of $\mathcal{O}(2^{nd})$.  
-These savings and accuracy can potentailly be increased by adopting adaptive sparse grid surrogates\cite{bungartz2004}.
-
-\subsubsection*{Augmented Surrogates}
-
-In predictive extrapolation, the target scenario for $Q(\theta)$ is often sufficiently expensive to even make the surrogate 
-approach tenuous.   One strategy in this
-situation is to construct the surrogate using a sequence of lower-fidelity models to construct $\tilde{Q}(\theta)$, and then train the surrogate\cite{Pehermulti}.  This often requires
-a good characterization of the error between $Q(\theta)$ and $\tilde{Q}(\theta)$.  This is not a well-explored or understood area in the kinetic plasma PIC community.  
-
-Another approach is to add deterministic parameters that describes ``nearby'' scenarios,
-s.t. $Q(\theta)=A(\theta,k_1,k_2,\ldots,k_r)$, $k_i$ fixed.  We call the determanistic parameters $k_i$ augmentation parameters, and the surrogate model
-$A_S$ of $A$, the augmented surrogate.  Moderate gains are achieved when the number of augmentation parameters is small and the cost of sampling $A$ outside of the prediction
-scenario $Q$ is much cheaper.  If the gradient of $A$ with respect to $\theta$ is only weakly dependent on the augmentation parameters, 
-significant (cost-based) accuracy savings can be achieved.  
-
-<<<<<<< HEAD
-There are two fundmental assumptions in the construction of an augmented surrogate of
-a $n$-dimensional predictive scenario $Q(\theta_1,\theta_2,\ldots,\theta_n)$.
-\begin{enumerate}
-\item There exists small number $m$ of (usually deterministic) parameters $d_1,d_2,\ldots,d_m$ that characterize
-nearby $n$-dimensional predictive scenarios $\tilde{Q}_i(\theta_1,\theta_2,\ldots,\theta_n)$.
-\item The cost of a sample from the nearby scenario, $C_{\tilde{Q}_i}$, is much less than the cost $C_Q$ of 
-a sample from the desired prediction scenario.
-\end{enumerate} 
-=======
 \section{Prediction under Uncertainty}
 \input{uq_section}
 
+<<<<<<< HEAD
 %
 %\section{Motivation for Performing Study}
 %>>>>>>> 6f21f4ca132eabe95ad55dea398ef4f20d0aadf1
@@ -255,24 +206,41 @@ arrange a NERSC account to avoid transfer of large binary files and allow simula
 \section{Literature Review}
 Literature Review for MIS Thesis Proposal
 Ralph C. Smith - Uncertainty Quantification\\
+=======
+
+\section{Motivation for Performing Study}
+
+ \cite{PPPL_P:2}
+The boundary physics of a magnetically confined plasma within a reactor are tied to variety of parameters. The parameter of interest for this study is the ion diffusivity 
+As such, a bird's eye view of the current research being performed in the field of plasma physics will be presented. \cite{J_Friedberg:1}
+This will be followed by a an overview of the diffusion model that will be explored in this paper.\\
+\section{Literature Review for MIS Thesis Proposal}
+\subsection*{Ralph C. Smith - Uncertainty Quantification}
+>>>>>>> 7743f98897ec0e1a10dda70ead44275893739ee7
 Determining the plasma size scaling of the ion diffusivity, and performing efficient sensitivity analysis on the ion diffusivity in the heating component of the XCG model, within a constructed surrogate model, will require a knowledge base in the following subjects.\\  
-Physics\\
+
+\subsection*{Physics}
 A background in plasma physics, and the component of the XCG model that is used to model plasma heating and ion diffusivity. To support my physical understanding while completing this research I have identified the following references.\\
-Plasma Physics and Fusion Reactors\\
+\begin{description}
+\item[Plasma Physics and Fusion Reactors]
 Jeffrey P. Friedberg – Plasma Physics and Fusion Energy\\
 This textbook covers the physics of plasma fusion, its applications as an energy sources, the physical requirements to create an energy producing fusion reactor, and the designs requirements for fusion reactor with a toroidal geometry - the geometry of the ITER fusion reactor.\\
-XCG Modeling\\
+\item[Gyrokinetic Plasma Simulation]
 Dr. Wei-Lee from the Princeton Plasma Fusion Physics Laboratory has posted the lecture notes and homework assignments from a course on “Theory and Modeling of Kinetic Plasmas” on his website.\\
 http://w3.pppl.gov/~wwlee/\\
  This course contains the background information on gyrokinetic model that is being used to describe the plasma boundary physics in the ITER Tokamak reactor. \\
 Project Description\\
 The project proposal from the Partnership Center for High-Fidelity Boundary Plasma Simulation provides the motivation for performing this research, as well as a reference list containing relevant literature that will be reviewed and cited as necessary. \\
-Case Study to Understand Current Methods in Uncertainty Quantification\\
+
+\item[Case Study to Understand Current Methods in Uncertainty Quantification]
 I am currently reviewing a paper referenced from the project proposal titled “Improved profile fitting and quantification of uncertainty in experimental measurements of impurity transport coefficients using Gaussian process regression” by Chilenski et al. to develop an understanding of the uncertainty quantification and parameter estimation pipeline.\\
 Uncertainty Quantification\\
 Performing the sensitivity analysis, and constructing surrogate models will require background knowledge in statistics, both Bayesian and frequ error analysis, uncertainty quantification, and surrogate models. Two textbooks have been identified to support this work.\\
-Uncertainty Quantification: Theory, Implementation, and Applications by Ralph C. Smith\\
-Data Reduction and Error Analysis for the Physical Sciences by Phillip R. Bevington and D. Keith Robinson\\
+\begin{enumerate}
+\item Uncertainty Quantification: Theory, Implementation, and Applications by Ralph C. Smith\\
+\item Data Reduction and Error Analysis for the Physical Sciences by Phillip R. Bevington and D. Keith Robinson\\
+\end{enumerate}
+\end{description}
 
 \newpage
 %% Bibliography Start
@@ -340,9 +308,4 @@ Data Reduction and Error Analysis for the Physical Sciences by Phillip R. Beving
 %	author = {Ralph C. Smith},
 %	year = {2014}
 %}
-<<<<<<< HEAD
 
-%%
-=======
-%%
->>>>>>> 6f21f4ca132eabe95ad55dea398ef4f20d0aadf1

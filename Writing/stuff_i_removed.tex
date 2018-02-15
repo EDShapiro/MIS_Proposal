@@ -1,0 +1,125 @@
+%Prediction under uncertainty is often an expensive and complicated process\cite{odensiam1,odensiam2}.
+%The tradeoff between the computational cost of complex models and the loss of predictive accuracy 
+associated with simpler models may be addressed by emerging multifidelity UQ approaches\cite{ngmulti,Pehermulti}.
+
+In magnetic confinement fusion, there is an important, clearly defined set of prediction scenarios, corresponding 
+to modelling future reactor(ITER/DEMO) performance.  Even a ``high-fidelity'', extreme-scale model such as XGC, still
+has a parameter space of large enough dimension to make a brute-force, 
+sampling-based predictive process
+impossible.  
+%The $N^{-1/2}$ convergence, where $N$ is the number of samples of the quantity of interest(QOI), is infeasible given the requirements on computational resources. 
+The traditional approach to prediction, with or without extrapolation, is to sample the model parameter input space
+$\theta=\theta_1,\theta_2, \ldots, \theta_d$, evaluate the model, and return a quantity of interest (QoI) $Q(\theta)$.
+Most realistic QoI maps are nonlinear in the QoI map(even if the governing PDE is linear), 
+so the probability distribution function(PDF) of $Q(\theta)$ will
+have to be estimate in a non-parametric way, typically
+ by kernel density estimation, or by computing empirical 
+statistics from samples.
+The mean-integrated squared error
+of the approximate PDF converges with a rate of $\mathcal{O}(N^{-2/(d+4)})$, where $N$ is the number of samples of the model
+and $d$ is the dimension of the input space.  As each sample typically involves a PDE solve and subsequent post-processing,
+this process quickly becomes exorbitantly expensive.  
+
+\subsection{Surrogate Models}
+
+A surrogate model replaces the large cost of the model solve 
+with a fast, explicit function evaluation.  The surrogate model
+is constructed via interpolation or regression on a modest number 
+of potentially deterministic traning samples $M$.  The
+error from insufficient samples in the kernel density estimation is exchanged for the error between the true QoI $Q(\theta)$ and surrogate QoI $Q_S(\theta)$\cite{butler2013propagation}.
+Sparse grid approaches \cite{bungartz2004,Jakeman2011LocalAD} give roughly the same error(modulo a factor of $n^{d-1}$, where $d$ is the dimension of the (input) parameter space and $n$ is the number of
+training points)) as traditional tensor-product surrogates.
+However, the number of samples is  $\mathcal{O}(2^n n^{d-1})$, instead of the full grid cost of $\mathcal{O}(2^{nd})$.  
+These savings and accuracy can potentailly be increased by adopting adaptive sparse grid surrogates\cite{bungartz2004}.
+
+\subsubsection*{Augmented Surrogates}
+
+In predictive extrapolation, the target scenario for $Q(\theta)$ is often sufficiently expensive to even make the surrogate 
+approach tenuous.   One strategy in this
+situation is to construct the surrogate using a sequence of lower-fidelity models to construct $\tilde{Q}(\theta)$, and then train the surrogate\cite{Pehermulti}.  This often requires
+a good characterization of the error between $Q(\theta)$ and $\tilde{Q}(\theta)$.  This is not a well-explored or understood area in the kinetic plasma PIC community.  
+
+Another approach is to add deterministic parameters that describes ``nearby'' scenarios,
+s.t. $Q(\theta)=A(\theta,k_1,k_2,\ldots,k_r)$, $k_i$ fixed.  We call the determanistic parameters $k_i$ augmentation parameters, and the surrogate model
+$A_S$ of $A$, the augmented surrogate.  Moderate gains are achieved when the number of augmentation parameters is small and the cost of sampling $A$ outside of the prediction
+scenario $Q$ is much cheaper.  If the gradient of $A$ with respect to $\theta$ is only weakly dependent on the augmentation parameters, 
+significant (cost-based) accuracy savings can be achieved.  
+
+There are two fundmental assumptions in the construction of an augmented surrogate of
+a $n$-dimensional predictive scenario $Q(\theta_1,\theta_2,\ldots,\theta_n)$.
+\begin{enumerate}
+\item There exists small number $m$ of (usually deterministic) parameters $d_1,d_2,\ldots,d_m$ that characterize
+nearby $n$-dimensional predictive scenarios $\tilde{Q}_i(\theta_1,\theta_2,\ldots,\theta_n)$.
+\item The cost of a sample from the nearby scenario, $C_{\tilde{Q}_i}$, is much less than the cost $C_Q$ of 
+a sample from the desired prediction scenario.
+\end{enumerate} 
+=======
+
+>>>>>>> 6f21f4ca132eabe95ad55dea398ef4f20d0aadf1
+
+The {\em augmented surrogate} is a surrogate model $A(\theta,d)$ constructed on training data $\{(\theta,d),\hat{Q}(\theta,d)\}$ in the $m+n$-dimensional
+parameter space.   %We briefly illustrate this approach via the following numerical cartoon.
+
+\subsubsection*{Adaptive sparse grid method}  
+The classical sparse grid method is dimension agnostic\cite{bungartz2004}. All interactions
+of the same order are treated equally. Often, a small subset of variables
+and interactions contributes significantly to the variability of the function $Q(\theta,d)$.  If the variability in the $\theta$-dimensions is
+greater than the variability in the scenario parameters($\{d_i\}$) then the overall cost of constructing the 
+larger dimensional surrogate is actually less, due to the cheaper computational cost of $\tilde{Q}_i$.
+
+We modify the 
+greedy algorithm for constructing $h$-adaptive generalized sparse grid (h-GSG) in \cite{Jakeman2011LocalAD}.
+The hierarchical surpluses for the current sparse grid are modified with a cost weight $W_C(d_1,d_2,\ldots,d_m)$ that approximates the relative
+cost of simulating the added sparse grid point, and a $m$-dimensional distance metric that penalizes sparse grid
+samples that are too far away from the prediction scenario $Q(\theta)$.  This encourages parameter exploration in $\theta_i$-dimensions at
+inexpensive simulation levels, while rewarding coarse grid points that reduce the local surrogate error near the prediction scenario $Q(\theta)$.  
+
+\subsection{Proposed UQ Study}
+We will conduct a base parameter scan in $(\rho_*)$, at the mean values of the uncertain inputs.  This will verify that wedge, Eulerian versus PIC, or other factors do not impact the conclusions reached in \cite{Yas_Ido}.  This scan will also provide the first training runs for
+the augmented surrogate $A$.  
+
+Data from a range of $\rho^{-1}_*$ simulations will be obtained in the interval (100,600) will be provided by Varis Carey and other members
+of the BPS Scidac team  from simulations run at NERSC and Oak Ridge facilites.  A budget of 20,000 SU at NERSC has been allocated for providing the data for this scaling study(which is already partially complete at the time of this proposal)
+ and for additional simulations to train the augmented surrogate to cover the input parameter space.
+The main input parameters parameterize the location, slope, and shape of the core heat source and boundary sink.  Additional parameters covering
+torque will be allowed if the computational budget allows further investigation.  If NERSC resources are expended, certain (small-scale)
+simulations will be conducted on CU-Denver or RMCC resources(Summit) under the supervision of Varis Carey.
+
+\subsubsection*{Postprocessing Software}
+Postprocessing software (python and Matlab) are available to extract plasma QoI from  XGC 2D and 1D diagnostic output.  The BPS team will
+arrange a NERSC account to avoid transfer of large binary files and allow simulation data to be repurposed for future studies.
+% Go through details on push forward scanning using a surrogate model.
+
+%The relationship between ion diffusivity, $\chi_i$, and the dimensionless radius $\rho*$ is given by
+%$$
+%\chi_i = (cT_e/|e|B )\rho*^{x_p}F(v_*, \beta, q_{\phi}, T_e/T_i, ...).
+%$$
+%
+%The first coefficient is the Bohm diffusivity function, where $c$ is the speed of light in the plasma, $T_e$ is the electron temperature $e$ is the electron charge, and B is the perpendicular magnetic field. The second coefficient contains the dimensionless radius, where the exponent $x_p$ determines the scaling of the ion diffusivity with respect to the dimensionless radius. The third coefficient is the dimensinless group formed by all of the relevant parameters.\\
+%\subsection{Methods of Reduced Order Models to Characterize Ion Heat Diffusion}
+
+%
+%  During this research project I will be focusing on the ion heat diffusivity, $\chi_i$, in a Tokamak reactor through the ion temperature gradient (ITG). I will be studying  scaling properties of the ITG with respect to the dimensionless number  $\rho* = \frac{\rho_i}{a}$, with $\rho* << 1$, and where $\rho_i$ is the ion gyroradius, or Larmor radius, and $a$ is the minor radius of a Tokamak reactor.\\
+
+
+Most research on the scaling of ion heat diffusivity is concerned with determining the exponential relationship between,  $\chi_i$ and $\chi_B\rho*^{n}$. $\chi_B = $ Bohm diffusivity function if the   on  I am interested in studying the scaling behavior of the ion diffusivity with respect to $\rho$, as it has been established that the scaling can be Bohm like, or $\chi_i \propto  \rho*^0$, or  The scaling properties of the ion diffusivity in a n, as if the diffusion scales in a Bohm (linear) fashion with respect to $\rho_*$ then the chan
+
+%he  is definedwhich is evaluated by studying the ion temperature gradient (ITG). It has been established that the ion heat diffusivity scales with respect to variables such as the plasma temperature and the cross-sectional radius of the reactor core. If the scaling of the ion diffusivity is  In a fusion reactor we are interested in the scaling properties of the ion diffusivity with respect to the dimensionless parameter $\rho* = \frac{\rho_i}{a}$, where $rho_i$ is the ionic gyroradius, and $a$ is the minor radius. If the scaling of the ion heat difussivity It is possible for a power discrepancy of this nature to occur if the thermal conduction, or ion diffusivity, scales linearly with the temperature of the It has been shown that thermal conduction of ions out of the plasma have the potential scale in a Bohm fashion with respect to the minor radius of a Tokamak reactor.
+
+%\section{Motivation}
+%
+%The motivation for this project is tied in to the overall goals of the Partnership Center for High-Fidelity Boundary Plasma Simulation, which is working to understand the boundary physics of a magnetically confined plasma in a nuclear fusion reactor using high-fidelity simulations. \cite{PPPL_P:2}\\
+%
+%For clarity, the boundary region in a fusion reactor is defined as “extending 10\% of the outer-minor radius in from the magnetic separatix, through the open field line scrape off layer, out to the material walls.” The separatix is the point where the magnetic field lines cross, which in the case of the Tokamak is at the bottom of of the toroid, while the scrape off layer (SOL) is defined as the plasma region that is characterized by open field lines, and is outside of the separatrix. The SOL absorbs most of the plasma exhaust and transports it along field lines to the divertor plates. The divertor plates are responsible for absorbing heat and ashe produced by the plasma, minimizing contamination of the plasma, and protecting thermal and neutronic loads.\\
+%
+%CHECK CITATION – INSERT MAIN MAGNETIC FIELD LINE FIGURE HERE\\
+%
+%The stability in the plasma boundary is critical to Tokamak operation, and thus the physics in the plasma boundary region must be understood before a fully functional fusion reactor can built. To elucidate the importance of understanding plasma boundary physics, an example of a critical issue related to stable operation of a fusion reactor is outlined below.\\
+%
+%Once a magnetically confined plasma reaches a heating threshold value the plasma transitions from a low-confinement mode (L-Mode) to a high-confinement mode (H-Mode). After L-H transition occurs, a steep pedestal in the plasma density develops in the plasma boundary region, as can be seen in figure 2.2. This transition brings a reduction in the radially directed electric field, as well as a reduction in the turbulence intensity, which in turn reduces heat transport, This reduction in turbulent transport leads to an increased heating in the ion core of the plasma by "a factor that is proportional to the temperature at the top of the pedestal." \cite{PPPL_P:2} The increased heating leads to a 2-3 fold increase in plasma power production, making the H-mode is the desired operating mode for future fusion reactors.\\
+%
+%Operating in H-mode requires a stable pedestal. However, the steep density gradient “acts as a source of free energy for the magnetohydrodynamic plasma edge localized modes (ELM),” \cite{PPPL_P:2}  in which the pedestal repeatedly “crashes”, yielding bursts of plasma towards the divertor plates. A proposed solution to this problem is to use stochastic magnetic fields to stabilize steep gradient in the boundary region, and thus control the edge localized modes.\\
+%
+%The Partnership seeks to understand  the L-H transition, pedestal structure, and  the requirements for ELM stability and control.  The plasma behavior in the boundary region is non-Maxwellian, and has non-equillibrium characteristics, requiring a first principles, 5-D gyrokinetic model, that simulates multiscale edge Tokamak plasma physics. Simulations include: The code used  (XGC), which is a particle in cell (PIC) code, requiring extreme high performance computing (HPC) to run a full plasma simulation.
+%
+%One of the Modeling and simulating the magnetically confined plasma in the boundary region is incredibly imporant to progressing plasma research due to the difficulty of collecting data from inside a nuclear reactor.\cite{Smith_UQ:3} The complexity of the  XGC code requires computational resources of the scale of Titan Cray XK at Oak Ridge National Laboratory. To reduce the computational complexity  to utilize surrogate methods to reduce the complexity of the models in order to more efficiently analyze the scaling of the ion diffusivity of the plasma. Constructing a surrogate model allows us to captures the primary behavior of the modeled process, and is sufficiently efficient for model validation and uncertainty propagation.  \cite{Smith_UQ:3}. To determine input parameters, boundary conditions and initial conditions, data from the C-Mod fusion reactor are analyzed in a probabilistic framework, in a process called model calibration. 
