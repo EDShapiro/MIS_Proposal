@@ -13,11 +13,8 @@
 \title{Integrated Science Thesis Proposal}
 \author{Evan Shapiro \\ Master's of Integrated Science, University of Colorado Denver}
 \begin{document}
-<<<<<<< HEAD
-\section{Abstract}
-Plasma microturbulence is a leading candidate for the anomalous
-diffusion observed in modern tokamak experiments. Global gyrokinetic
-=======
+
+%<<<<<<< HEAD
 
 
 \begin{abstract}
@@ -25,7 +22,6 @@ Plasma microturbulence is a leading candidate of the source
 %for the anomalous
 of anomalous diffusion observed in %modern 
 tokamak experiments. Global gyrokinetic
->>>>>>> 6f21f4ca132eabe95ad55dea398ef4f20d0aadf1
 models have been shown to accurately predict the ion diffusivity, $\chi_i$
 . Extreme-scale, fixed-flux supercomputing simulations are beginning
 to simulate modes of operation relevant to next-generation(ITER,DEMO)
@@ -181,15 +177,15 @@ a sample from the desired prediction scenario.
 \section{Prediction under Uncertainty}
 \input{uq_section}
 
-
-\section{Motivation for Performing Study}
->>>>>>> 6f21f4ca132eabe95ad55dea398ef4f20d0aadf1
+%
+%\section{Motivation for Performing Study}
+%>>>>>>> 6f21f4ca132eabe95ad55dea398ef4f20d0aadf1
 
 The {\em augmented surrogate} is a surrogate model $A(\theta,d)$ constructed on training data $\{(\theta,d),\hat{Q}(\theta,d)\}$ in the $m+n$-dimensional
 parameter space.   %We briefly illustrate this approach via the following numerical cartoon.
 
 \subsubsection*{Adaptive sparse grid method}  
-The classical sparse grid method is dimension agnostic\cite{bungartz2004}. All interactions
+The classical sparse grid method is dimension agnostic \cite{Bungartz}. All interactions
 of the same order are treated equally. Often, a small subset of variables
 and interactions contributes significantly to the variability of the function $Q(\theta,d)$.  If the variability in the $\theta$-dimensions is
 greater than the variability in the scenario parameters($\{d_i\}$) then the overall cost of constructing the 
@@ -230,7 +226,7 @@ arrange a NERSC account to avoid transfer of large binary files and allow simula
 %  During this research project I will be focusing on the ion heat diffusivity, $\chi_i$, in a Tokamak reactor through the ion temperature gradient (ITG). I will be studying  scaling properties of the ITG with respect to the dimensionless number  $\rho* = \frac{\rho_i}{a}$, with $\rho* << 1$, and where $\rho_i$ is the ion gyroradius, or Larmor radius, and $a$ is the minor radius of a Tokamak reactor.\\
 
 
-Most research on the scaling of ion heat diffusivity is concerned with determining the exponential relationship between,  $\chi_i$ and $\chi_B\rho*^{n}$. $\chi_B = $ Bohm diffusivity function if the   on  I am interested in studying the scaling behavior of the ion diffusivity with respect to $\rho$, as it has been established that the scaling can be Bohm like, or $\chi_i \propto  \rho*^0$, or  The scaling properties of the ion diffusivity in a n, as if the diffusion scales in a Bohm (linear) fashion with respect to $\rho_*$ then the chan
+%Most research on the scaling of ion heat diffusivity is concerned with determining the exponential relationship between,  $\chi_i$ and $\chi_B\rho*^{n}$. $\chi_B = $ Bohm diffusivity function if the   on  I am interested in studying the scaling behavior of the ion diffusivity with respect to $\rho$, as it has been established that the scaling can be Bohm like, or $\chi_i \propto  \rho*^0$, or  The scaling properties of the ion diffusivity in a n, as if the diffusion scales in a Bohm (linear) fashion with respect to $\rho_*$ then the chan
 
 %he  is definedwhich is evaluated by studying the ion temperature gradient (ITG). It has been established that the ion heat diffusivity scales with respect to variables such as the plasma temperature and the cross-sectional radius of the reactor core. If the scaling of the ion diffusivity is  In a fusion reactor we are interested in the scaling properties of the ion diffusivity with respect to the dimensionless parameter $\rho* = \frac{\rho_i}{a}$, where $rho_i$ is the ionic gyroradius, and $a$ is the minor radius. If the scaling of the ion heat difussivity It is possible for a power discrepancy of this nature to occur if the thermal conduction, or ion diffusivity, scales linearly with the temperature of the It has been shown that thermal conduction of ions out of the plasma have the potential scale in a Bohm fashion with respect to the minor radius of a Tokamak reactor.
 
@@ -251,11 +247,11 @@ Most research on the scaling of ion heat diffusivity is concerned with determini
 %The Partnership seeks to understand  the L-H transition, pedestal structure, and  the requirements for ELM stability and control.  The plasma behavior in the boundary region is non-Maxwellian, and has non-equillibrium characteristics, requiring a first principles, 5-D gyrokinetic model, that simulates multiscale edge Tokamak plasma physics. Simulations include: The code used  (XGC), which is a particle in cell (PIC) code, requiring extreme high performance computing (HPC) to run a full plasma simulation.
 %
 %One of the Modeling and simulating the magnetically confined plasma in the boundary region is incredibly imporant to progressing plasma research due to the difficulty of collecting data from inside a nuclear reactor.\cite{Smith_UQ:3} The complexity of the  XGC code requires computational resources of the scale of Titan Cray XK at Oak Ridge National Laboratory. To reduce the computational complexity  to utilize surrogate methods to reduce the complexity of the models in order to more efficiently analyze the scaling of the ion diffusivity of the plasma. Constructing a surrogate model allows us to captures the primary behavior of the modeled process, and is sufficiently efficient for model validation and uncertainty propagation.  \cite{Smith_UQ:3}. To determine input parameters, boundary conditions and initial conditions, data from the C-Mod fusion reactor are analyzed in a probabilistic framework, in a process called model calibration. 
-
- \cite{PPPL_P:2}
-The boundary physics of a magnetically confined plasma within a reactor are tied to variety of parameters. The parameter of interest for this study is the ion diffusivity 
-As such, a bird's eye view of the current research being performed in the field of plasma physics will be presented. \cite{J_Friedberg:1}
-This will be followed by a an overview of the diffusion model that will be explored in this paper.\\
+%
+% \cite{PPPL_P:2}
+%The boundary physics of a magnetically confined plasma within a reactor are tied to variety of parameters. The parameter of interest for this study is the ion diffusivity 
+%As such, a bird's eye view of the current research being performed in the field of plasma physics will be presented. \cite{J_Friedberg:1}
+%This will be followed by a an overview of the diffusion model that will be explored in this paper.\\
 \section{Literature Review}
 Literature Review for MIS Thesis Proposal
 Ralph C. Smith - Uncertainty Quantification\\
