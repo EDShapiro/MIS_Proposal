@@ -112,15 +112,19 @@ The classical and neoclassical models are unable to account for the observed, an
 
 We define $\rho^*$ to be $\rho^* = \rho_i/a$ where $\rho_i$ is the gyrokinetic radius of the ion as it moves around the magnetic field in its trajectors through the fusion reactor, and $a$ is the minor radius of the tokamak, or the radius of the inner cross-sectional area of the tokamak. The reason that $\rho^*$ is interesting is because "Existing experimental devices can match all of these transport relevant dimensionless parameters expected in a reactor scale with the exception of $\rho^*$ \cite{McKee_Et}." The inability to set the parameter $rho^*$ in a lab experiment, and the advanced modeling and simulation capabilities of current tech, make a new study on ionic thermal diffusivity an ideal topic for a master's thesis\\
 
-Thus, the stated purpose of this thesis is to determine how the ionic thermal diffusivity scales with a scan in $\rho^*$ up to ITER scales, to determine whether the diffusion becomes Bohm or gyro-Bohm like. Bohm diffusion indicates that the diffusin increases linearly with temperature, and is undesireable, while gyro-Bohm diffusion indicates that the  diffusion scales sublinearly with temperature, and is desireable.
+Thus, the stated purpose of this thesis is to determine how the ionic thermal diffusivity scales with a scan in $\rho^*$ up to ITER scales, to determine whether the diffusion becomes Bohm or gyro-Bohm like. Bohm diffusion indicates that the diffusion increases linearly with temperature, and is undesireable, while gyro-Bohm diffusion indicates that the  diffusion scales sublinearly with temperature, and is desireable.
 %%Add More Detail Above
 
 %%This may be redundant with later material
 
-We will use available experimental fusion reactor data, and implement surrogate modeling techniques to reduce the computational expense of running a simulation of 5-D high-fidelity gyrokinetic model. The outcome of this project will be a pdf of the ion diffusion, with uncertainties. Once this is accomplished, if time permits, we will perform a %push forward 
+We will use available experimental fusion reactor data, and implement surrogate modeling techniques to reduce the computational expense of running a simulation of 5-D  gyrokinetic model  of a plasma within a tokamak reactor, which is the geometr of the ITER reactor. The outcome of this project will be a pdf of the ion diffusion, with uncertainties. Once this is accomplished, if time permits, we will perform a %push forward 
 comprehensive sensitivity analysis of the heating model.
 
 \subsection{Gyrokinetic Equations}
+The complete derivation of the governing set of equations of multi-scale physics in a tokamak reactor is well beyond the scope of this paper. However, the important physics that are described by the governing equations should be covered for clarity and reference. The governing set of equations of a plasma are called the Vlasov-Boltzmann equations and are provided below: 
+$$
+$$
+The first equation is the Boltzmann convection-collision equation  modified for an electromagnetic system. Since the majority of the interactions in a plasma are Coulombic interactions, and they dominate the characteristics of the plasma, the collision term from the full Boltzmann eqution is ignored. The Vlasov equation decribes how the plasma is going to travel due to external forces acting on the plasma.
 \subsection{XGC Code \& Heating Models}
 \section{Experimental Metholodogy}
 
@@ -163,6 +167,13 @@ simulations will be conducted on CU-Denver or RMCC resources(Summit) under the s
 \subsubsection*{Postprocessing Software}
 Postprocessing software (python and Matlab) are available to extract plasma QoI from  XGC 2D and 1D diagnostic output.  The BPS team will
 arrange a NERSC account to avoid transfer of large binary files and allow simulation data to be repurposed for future studies.
+\section{Educational Methodology}
+In order to familiarize myself with the above experimental methods, I propose the following framework constructed of seeting up a toy problem, and implementing. First numerically evaluating a familiar PDE model using a finite difference method-  possibly the 1-D diffusion equation or the 1-D neutron transport equation - then propogating the uncertainty of the parameters through the model to develop a distribtuion of the quantity of interest. The neutron diffusion model is appealing as there are libraries available on the distribution of the nuclear cross-section that can be used for uncertainty quantification \cite{Smith}.\\
+%%
+After creating a blackbox to generate the quantity of interest under uncertainty, I can then use these generated quantities along with the avilable inputs to construct a surrogate model using methods of linear or nonlinear regression. The quadratic response surface model has been identified as a surrogate modeling method to perform this task. After constructing said surrogate model, the approximate quantity of interest can be compared to the quantity of interest of the real model, with statistics and correlations run on the QoI's. The surrogate models will be run under uncertainty as well, with a statistical comparison run on QoI distribution.To achieve a more accurate surrogate model, I will update the surrogate model based on the QoI distribution.\\
+%%
+The understand the complexity associated with scaling into N-D, as we will in this project, the finite difference model will progressively be scaled from 1-D to N-D. The above framework for uncertainty quantification and surrogate model creation and evaluation will be performed as the dimensionality of the system is increased. My thesis will contain all of this information as a guiding example for the actual research being performed.\\
+
 % Go through details on push forward scanning using a surrogate model.
 
 %The relationship between ion diffusivity, $\chi_i$, and the dimensionless radius $\rho*$ is given by
@@ -203,20 +214,9 @@ arrange a NERSC account to avoid transfer of large binary files and allow simula
 %The boundary physics of a magnetically confined plasma within a reactor are tied to variety of parameters. The parameter of interest for this study is the ion diffusivity 
 %As such, a bird's eye view of the current research being performed in the field of plasma physics will be presented. \cite{J_Friedberg:1}
 %This will be followed by a an overview of the diffusion model that will be explored in this paper.\\
-\section{Literature Review}
-Literature Review for MIS Thesis Proposal
-Ralph C. Smith - Uncertainty Quantification\\
-=======
 
-\section{Motivation for Performing Study}
-
- \cite{PPPL_P:2}
-The boundary physics of a magnetically confined plasma within a reactor are tied to variety of parameters. The parameter of interest for this study is the ion diffusivity 
-As such, a bird's eye view of the current research being performed in the field of plasma physics will be presented. \cite{J_Friedberg:1}
-This will be followed by a an overview of the diffusion model that will be explored in this paper.\\
 \section{Literature Review for MIS Thesis Proposal}
 \subsection*{Ralph C. Smith - Uncertainty Quantification}
->>>>>>> 7743f98897ec0e1a10dda70ead44275893739ee7
 Determining the plasma size scaling of the ion diffusivity, and performing efficient sensitivity analysis on the ion diffusivity in the heating component of the XCG model, within a constructed surrogate model, will require a knowledge base in the following subjects.\\  
 
 \subsection*{Physics}
