@@ -207,8 +207,6 @@ The understand the complexity associated with scaling into N-D, as we will in th
 
 Determining the plasma size scaling of the ion diffusivity, and performing efficient sensitivity analysis on the ion diffusivity in the heating component of the XCG model, within a constructed surrogate model, will require a knowledge base in the following subjects.\\  
 
-Ralph C. Smith has written an introductory textbook on uncertainty quantification that provides useful models, examples and problems to guide the educational and experimental components of this thesis. The texbook has all of the background knowledge necessary to develop a toy surrogate model as proposed in this document.\\  
-
 \subsection*{Physics}
 
 A background in plasma physics, and the component of the XCG model that is used to model plasma heating and ion diffusivity. To support my physical understanding while completing this research I have identified the following references.\\
@@ -216,21 +214,33 @@ A background in plasma physics, and the component of the XCG model that is used 
 
 \item[Plasma Physics and Fusion Reactors]\hfill
 
-Jeffrey P. Friedberg – Plasma Physics and Fusion Energy\\
-This textbook covers the physics of plasma fusion, its applications as an energy sources, the physical requirements to create an energy producing fusion reactor, and the designs requirements for fusion reactor with a toroidal geometry - the geometry of the ITER fusion reactor.\\
+\subitem[Jeffrey P. Friedberg – Plasma Physics and Fusion Energy]\\
+	This textbook covers the physics of plasma fusion, its applications as an energy sources, the physical requirements to create an energy producing fusion reactor, and the designs requirements for fusion reactor with a toroidal geometry - the geometry of the ITER 		fusion reactor.\\
 
 \item[Gyrokinetic Plasma Simulation]\hfill
 
-Plasma Modeling Methods and Applications - Textbook\\
-This is a modern textbook that covers kinetic theory plasma models, fluid equations and hybrid plasma models, and applications of these models. Each model is developed from first principles, making this an invaluable source for understanding the 5-D gyrokinetic model, as well as a good source for the developing and implementing the models that were discussed in the educational section of this proposal.\\
+	Plasma Modeling Methods and Applications - Textbook\\
+	This is a modern textbook that covers kinetic theory plasma models, fluid equations and hybrid plasma models, and applications of these models.
+	 Each model is developed from first principles, making this an invaluable source for understanding the 5-D 		gyrokinetic model,
+ 	as well as a good source for the developing and implementing the models that were discussed in the educational section of this proposal.\\
+	
+	Dr. Wei-Lee from the Princeton Plasma Fusion Physics Laboratory has posted the lecture notes and homework assignments from a course on “Theory and Modeling of Kinetic Plasmas” on his website.\\
+	http://w3.pppl.gov/~wwlee/\\
+	This course contains the background information on gyrokinetic model that is being used to describe the plasma boundary physics in the ITER Tokamak reactor. \\
+	Project Description\\
+	The project proposal from the Partnership Center for High-Fidelity Boundary Plasma Simulation provides the motivation for performing this research, as well as a reference list containing relevant literature that will be reviewed and cited as necessary. \\
+	
+	XCG User Handbook - This online handbook provides preliminary information to understand how to use the XCG simualtion software. There is contact information available to constanct managing code users/developers.
 
-Dr. Wei-Lee from the Princeton Plasma Fusion Physics Laboratory has posted the lecture notes and homework assignments from a course on “Theory and Modeling of Kinetic Plasmas” on his website.\\
-http://w3.pppl.gov/~wwlee/\\
-This course contains the background information on gyrokinetic model that is being used to describe the plasma boundary physics in the ITER Tokamak reactor. \\
-Project Description\\
-The project proposal from the Partnership Center for High-Fidelity Boundary Plasma Simulation provides the motivation for performing this research, as well as a reference list containing relevant literature that will be reviewed and cited as necessary. \\
+\item[Scaling Relationship Beween Ion Heat Diffusivity, $\chi_i$, and Dimensionless Radius $\rho* = \rho_i/a$]\hfill
 
-<<<<<<< HEAD
+Two articles are cited in the literature when referring to scaling arguments between plasma ion heat diffusion and $\rho*$. Both articles provide a lot of clairty to the nature of the scaling parameters that are affiliated with heat diffusion.\\
+Non-Dimensional scaling of turbulence characteristics and turbulent diffusivity - G.R. McGee et al.\\
+Gyroradius Scaling of Electron and Ion Transport - C.C. Petty et al\\
+
+\item[Prior Research in the Scaling Relationship Between $\chi_i$ and $\rho^*$]\hfill
+Yasuhiro Idomura and Motoki Nakata has completed research in this field, analyzing the relationship between plasma size and ion temperature gradient driven turbulence. This scan was taken over sections comprised of 1/6 of the tokamak, with periodic boundary conditions. 
+
 \subsection*{Numerical Methodology}
 The mathematical component of my Master's of Integrated science will be fulfilled in this thesis through applications of numerical methods in accurate PDE model simulation, uncertainty quantification, surrogate model construction, and exact model validation.
 \item[Uncertainty Quantification] \hfill
@@ -246,20 +256,21 @@ I am currently reviewing a paper referenced from the project proposal titled “
 
 \item[General Probability and Statistics]\hfill
 
-Performing all of this work requires a base understanding in probability, Bayesian statistics, and data reduction and error analysis. The following textbooks have been identified to provide a base level of support in these topics.\\
-=======
-\item[Case Study to Understand Current Methods in Uncertainty Quantification]
+Performing this work requires a base understanding in probability, Bayesian statistics, and data reduction and error analysis. The following textbooks have been identified to provide a base level of understanding of these topics.\\
+Data Reduction and Error Analysis for the Physical Sciences - Philip R. Bevington,  D. Keih Robinson  - This textbook contains introductory methodology in data reduction, error analysis, probability, and statistics, with plenty of useful examples.\\
+Data Analysis - A Bayesian Tutorial by  D.S. Sivia - This is an introductory textbook in Bayesian statistics, which will be employed throughout this project.\\
 
-I am currently reviewing a paper referenced from the project proposal titled “Improved profile fitting and quantification of uncertainty in experimental measurements of impurity transport coefficients using Gaussian process regression” by Chilenski et al. to develop an understanding of the uncertainty quantification and parameter estimation pipeline.
-
-\item[Uncertainty Quantification]
-Performing sensitivity analysis, and constructing surrogate models 
-will require background knowledge in statistics, %both Bayesian and frequ error analysis, 
-uncertainty quantification, and surrogate models. Two textbooks have been identified to support this work.\\
->>>>>>> 51d57c3de22a2c3682c977e27f2fbf388717be1f
+\item[Textbooks]\hfill
 \begin{enumerate}
+\item Plasma Physics and Fusion Energy by Jeffrey Friedberg\\
+\item Plasma Modeling Methods and Applications\\
 \item Uncertainty Quantification: Theory, Implementation, and Applications by Ralph C. Smith\\
+\item Data Analysis - A Bayesian Tutorial by  D.S. Sivia\\
 \item Data Reduction and Error Analysis for the Physical Sciences by Phillip R. Bevington and D. Keith Robinson\\
+\end{enumerate}
+
+\item[Articles] 
+\begin{enumerate}
 \end{enumerate}
 \end{description}
 
