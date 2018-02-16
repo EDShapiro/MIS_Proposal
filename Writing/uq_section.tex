@@ -92,9 +92,14 @@ Postprocessing software (python and Matlab) are available to extract plasma QoI 
 arrange a NERSC account for Evan to avoid transfer of large binary files and allow simulation data to be repurposed for serving the 
 plasma fusion community.
 
-Evan: you won't be expected to do any major software development(mainly just modify some scripts, maybe improve them) as part of this project.
+%Evan: you won't be expected to do any major software development(mainly just modify some scripts, maybe improve them) as part of this project.
+
+\subsection{Contingency Research Plan}
+Large scale gyrokinetic simulations, especially at large values of $\rho_*^{-1}$, involve considerable resources, and certain stability 
+requirements for the simulations are only roughly known {\em a priori}.  In the event of insufficient data to build the $\rho_*$ augmented surrogate, we will instead switch to looking at the effect on transport of uncertanties in the background magnetic field.  This is actually
+a harder problem as the perturbations (i.e. the samples) must be valid solutions of the Grad-Shrafanov equations.  We will investigate this in a 1D or 2D slab geometry using standard techniques uncertainty quantification techniques.  This will also be a publishable, impactful result, and could affect future work in 2D(axisymmetric) or 3D tokamak geometries.
+
 
  
-
 
  
