@@ -40,24 +40,39 @@ model.% in the $XGC$ model.
 
 
 \section{Introduction}
+
 \subsection{Magnetically Confined Fusion}
-After Hans Bethe developed the theory for nuclear fusion in the sun, showing that only hydrogen to helium nuclear reactions can account for the energy production by the sun  \cite{Bethe}, fusion research to produce these processes began globally. Due to increasing computational power, as well as international  research collaborations, the 21st century has seen a resurgence in interest fusion energy as serious contender for sustainable energy, the most norable being the international thermonuclear experimental reactor (ITER), which will resolve many of the issues that currently stand in the way of a working fusion reactor.\\
-Nuclear fusion is appealing as an energy source due to the net positive energy release that occurs when two light elements collide with enough energy to cause the transfer of a nucleon from one nucleus to the other. In the deuterium-tritium reaction a proton from the deuterium atom is fused to the tritium atom, yielding a release of a neutron, and $\alpha$ particle, and the release of $17.6 MeV$ of binding energy. $14.1 MeV$ of this binding energy is given to the neutron, and it is this energy that a fusion reactor taps into to power a steam turbine. The nuclear equation for dueterium-tritium reaction is presented below, along with an illustration:
+The history of nuclear fusion research dates back to the 1920's, when Arthur Eddington suggested in his book "The Internal Constitution of Stars" that the transmutation of hydrogen atoms through nuclear fusion into helium is responsible for powering the energy released by the sun.% \cite{ITER_1}\cite{Eddington}.
+ In 1934, Ernest Rutherfor and his assistant Mark Oliphant succesfully fused deuterium by generating voltages of 400,000V, colliding deuterium atoms with duterium atoms.
+ They reported a net release of binding energy of $4MeV$ per $D-D$ reaction, making it an energetically favorable.%\cite[Rutherford_Oliphant]. $% their aritcle, "Transmutation Effects Observed with Heavy Hydrogen",\\
+In his 1939 article, "Energy Production in Stars", Hans Bethe posited that only 2 elements lighter than carbon were stable for a long enough period of time to provide a fuel source for the nuclear fusion reactions that take place in faint stars: $H^2$ and $He^4$. 
+$He^4$ is in fact too stable an element to be a solar fuel source, indicating that the nuclear reactions in stars could only be explained by a 
 $$
-D+T \rightarrow \alpha + n + 17.6 MeV
+H^2-H^2 \rightarrow He^3 + n
+$$ 
+reaction.\\%
+Research dedicated to producing and controlling nuclear fusion reactions, as a method of power and energy production, led to the U.S., Russia, France and Japan building fusion reactos in the 1950s. In 1958 Russian scientists built the first tokamak fusion reactor, a toroid shaped reactor which is the Russian translation of "Toroidal Chamber with Magnetic Coils." The toroidal design is the standard in fusion reactor design as the toroidal shape is ideally suited to the magnetic fields required to confine a plasma. Please see the first figure for a tokamak design image.\\
+Current fusion research focuses on the the deuterium-tritium fusions reaction, given by
 $$
- \cite{J_Friedberg:1} .\\
-\\
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.5\columnwidth]{D_T_MP}
-	\caption{Deuterium-Tritum Reaction Image Courtesy of Max-Planck Institute}
-\end{figure}
-\\
-Creating a sustained reaction of a 50-50 $\%$ Deuterium-Tritium mixture requires an input of $70KeV$, corresponding to a temperature on the order of $100*10^6$K. It is this high temperature environment that leads to the complete ionization of the deuterium-tritium mixture, resulting in a plasma.\\
-More detail will be included below - just need to get ideas down.\\
-%Is this enough detail on power balance? Should I go into more detail on what the sources and sinks are?
-Due to the engineering requirements for magnetic pressure, plasma confinement time, and plasma temperature, with the complete explanation of these requirements being beyond the scope of this proposal, a toroidal geometry is the accepted geometry for a fusion reactor. The basic design requirements are as follows. The plasma is contained within the inner cylinder of a toroid, with the first wall of the cylinder being protected by a strong magnetic field that shields the wall from thermal loading from the $14.1 MeV$ neutrons, Bremsstrahlung heat loss, and heat conduction. Inside the first wall is the region called the blanket and shield, which is the region of heat exchange for powering an external steam turbine, and provides a tritium breeding ground that sustains the supply of tritium required for the fusion reaction. Outside of this region is the a shield wall which prevents the escape of any radioactive neutrons or gamma particles. The final layer of the toroid contains the superconducting toroidal solenoid, which generates the $10-15 [T]$ magnetic field inside of the fusion reactor, which again is responsible for confining the ionic and electron components of the plasma inside the reactor. Figures 1 shows the generic theoretical cross-sectional area of toroidal reactor, while figure 2 shows the cross-sectional area of the ARIES-AT tokamak design.\\
+H^2 + H^3 \rightarrow \alpha + n + 17.6 MeV
+$$
+as it is more energetically favorable than the $D-D$ reaction by an order of 14 MeV per reaction. When detuterium and tritium fuse an $\alpha$ particle, or $He^4$ particle, and a neutron are released. %Show nuclear reaction math here?
+$14.1 MeV$ of the released binding energy is given to the neutron in the form of kinetic energy, and the remaining given to the $\alpha$ particle. 
+It can be shown that the operating temperatures of a fusion reactor starts at around 10KeV, which is well above the ionizing temperature of hyrdogen and helium, leading to deuterium-tritium fuel to becoming a plasma within a fusion reactor.\\
+
+ Fusion reactor design uses the energy of the $\alpha$ particle for maintaining the temperature of the plasma, while the energy of the neutron, which is allowed to escape the plasma into the blanket of the reactor, is responsible for heating and powering a stems turbine.
+For a fusion reactor to be viable as a power source, it must be take an initial heating input to develop a deuterium-tritium fuel source into a self sustaining plasma. 
+Self sustaining means that the $\alpha$ heating is able to balance the heat losses due to Bremsstrahlung radation, neutron espace, and ion diffusion out of the system.%Derive Threshold temperature here or later
+This balance is called the principal of power balance; it cannot be emphasized enough that meeting and maintaining power balance within a fusion reactor is critical to fusion power becoming a viable energy source.\\
+%The 0-D fluid conservation of energy equation is given by:
+%$$
+%\frac{3}{2}\frac{\partial p}{\partial t} + \frac{3}{2}\nabla \cdot p \vec{v} + p\nabla \cdot v + \nabla\cdot \vec{q} = S
+%$$
+%where the internal energy $U$ has been substituted for $\frac{3}{2}p$\cite{J_Friedberg:1}.\\
+One of the chief concerns in fusion reactor design is heat diffusing out of the magnetically confined region by way of ions, also referred to as ion heat diffusion. Ion heat diffusion is responsible for the majority of the heat lost by the plasma, and as such much attention has been paid to the mechanisms causing this heat loss.
+To illustrate the principal power balance let us look at 0-D conservation of energy equation for fluids. This equation is given by
+
+The plasma is contained within the inner cylinder of a toroid, with the first wall of the cylinder being protected by a strong magnetic field that shields the wall from thermal loading from the $14.1 MeV$ neutrons, Bremsstrahlung heat loss, and heat conduction. Inside the first wall is the region called the blanket and shield, which is the region of heat exchange for powering an external steam turbine, and provides a tritium breeding ground that sustains the supply of tritium required for the fusion reaction. Outside of this region is the a shield wall which prevents the escape of any radioactive neutrons or gamma particles. The final layer of the toroid contains the superconducting toroidal solenoid, which generates the $10-15 [T]$ magnetic field inside of the fusion reactor, which again is responsible for confining the ionic and electron components of the plasma inside the reactor. Figures 1 shows the generic theoretical cross-sectional area of toroidal reactor, while figure 2 shows the cross-sectional area of the ARIES-AT tokamak design.\\
 \\
 \begin{figure}[h]
 \begin{subfigure}[t*]{0.5\textwidth}
@@ -74,14 +89,7 @@ Due to the engineering requirements for magnetic pressure, plasma confinement ti
 \\
 Not shown in the picture is the center, or donut hole, of the toroidal reactor. In current reactors, there is an additional magnet in this region that produces a poloidal magnetic field, which when combined with the toroidal magnetic fields produces the magnetic field lines, as seen in figure 3. Due to the Lorentz force, this configuration of magnetic field lines manages to capture the majority of the diffusing ions and electrons in a helical tractory around the magnetic fields lines due to to the Lorentz force on the charged particles.
 \subsection{Diffusion, Neoclassical Theory, and Scaling Laws}
-Maintaining a viable, power producing fusion reactor requires that power inputs and outputs be balanced within the reactor.
- This power balances requires an accounting of all of the power sinks and sources available to the plasma, as well as an accounting of all the transport mechanisms within the plasma. 
-While we are using a 5-D gyrokinetic model in our simulation work, it can be illustrative to use the 0-D conservation of energy equation to demonstrate the basic principle of power balance. 
-The 0-D fluid conservation of energy equation is given by:
-$$
-\frac{3}{2}\frac{\partial p}{\partial t} + \frac{3}{2}\nabla \cdot p \vec{v} + p\nabla \cdot v + \nabla\cdot \vec{q} = S
-$$
-where the internal energy $U$ has been substituted for $\frac{3}{2}p$\cite{J_Friedberg:1}.\\
+
 Let's analyze this equation: The first term accounts for the variation of energy flowing into and out of the system with respect to time, the second term accounts for energy lost or gained due to convection of heat out of the system, the third term accounts for energy losses due to compression and expansion of the plasma within a reactor, the 4th term account for heat losses due to diffusion and conduction, and $S$ accounts for the sources and sinks available to the plasma. The sources are the $\alpha$ particle heating due to the D-T nuclear reaction and any auxiiliary heating being supplied to the plasma, while the sinks are the neutrons escaping the plasma into the blanket surrounding the reactor, and Bremsstrahlung radiation.\\
 %%
 \\
