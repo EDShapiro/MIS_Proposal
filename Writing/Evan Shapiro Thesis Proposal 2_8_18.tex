@@ -14,13 +14,6 @@
 \title{Integrated Science Thesis Proposal}
 \author{Evan Shapiro \\ Master's of Integrated Science, University of Colorado Denver}
 \begin{document}
-<<<<<<< HEAD
-
-%<<<<<<< HEAD
-
-=======
->>>>>>> 7743f98897ec0e1a10dda70ead44275893739ee7
-
 \begin{abstract}
 Ion diffusion at ITER scales must beGlobal gyrokinetic models have been shown to accurately predict the ion diffusivity by incorporating microturbulence into the models, $\chi_i$.
 Extreme-scale, fixed-flux supercomputing simulations are beginning
@@ -35,95 +28,94 @@ model.% in the $XGC$ model.
 \maketitle
 \tableofcontents
 
-\maketitle
-\tableofcontents
+
 
 
 \section{Introduction}
 
 \subsection{Magnetically Confined Fusion}
 The history of nuclear fusion research dates back to the 1920's, when Arthur Eddington suggested in his book "The Internal Constitution of Stars" that the transmutation of hydrogen atoms through nuclear fusion into helium is responsible for powering the energy released by the sun.% \cite{ITER_1}\cite{Eddington}.
- In 1934, Ernest Rutherfor and his assistant Mark Oliphant succesfully fused deuterium by generating voltages of 400,000V, colliding deuterium atoms with duterium atoms.
- They reported a net release of binding energy of $4MeV$ per $D-D$ reaction, making it an energetically favorable.%\cite[Rutherford_Oliphant]. $% their aritcle, "Transmutation Effects Observed with Heavy Hydrogen",\\
+In 1934, Ernest Rutherfor and his assistant Mark Oliphant succesfully fused deuterium by generating voltages of 400,000V, colliding deuterium atoms with duterium atoms.
+They reported a net release of binding energy of $4MeV$ per $D-D$ reaction, making it an energetically favorable.%\cite[Rutherford_Oliphant]. $% their aritcle, "Transmutation Effects Observed with Heavy Hydrogen",\\
 In his 1939 article, "Energy Production in Stars", Hans Bethe posited that only 2 elements lighter than carbon were stable for a long enough period of time to provide a fuel source for the nuclear fusion reactions that take place in faint stars: $H^2$ and $He^4$. 
 $He^4$ is in fact too stable an element to be a solar fuel source, indicating that the nuclear reactions in stars could only be explained by a 
 $$
 H^2-H^2 \rightarrow He^3 + n
 $$ 
 reaction.\\%
-Research dedicated to producing and controlling nuclear fusion reactions, as a method of power and energy production, led to the U.S., Russia, France and Japan building fusion reactos in the 1950s. In 1958 Russian scientists built the first tokamak fusion reactor, a toroid shaped reactor which is the Russian translation of "Toroidal Chamber with Magnetic Coils." The toroidal design is the standard in fusion reactor design as the toroidal shape is ideally suited to the magnetic fields required to confine a plasma. Please see the first figure for a tokamak design image.\\
+Research dedicated to producing and controlling nuclear fusion reactions, as a method of power and energy production, led to the U.S., Russia, France and Japan building fusion reactos in the 1950s. In 1958 Russian scientists built the first tokamak fusion reactor, a toroid shaped reactor which is the Russian translation of "Toroidal Chamber with Magnetic Coils." The toroidal design is the standard in fusion reactor design as the toroidal shape is ideally suited to the magnetic fields required to confine a plasma. Please see the first figure for a tokamak design image. Today, international research and development support from over 30 member countries is being dedicated to the tokamak International Thernuclear Experimential Reactor (ITER), which is being built in Cadarache, France. ITER is a full-scale experimental reactor that is the final step before building a demonstrative reactor (DEMO), with the goal of developing a full theory of plasma within an ITER scale fusion reactor, and solving all the engineering problems related a working fusion reactor.\\
 Current fusion research focuses on the the deuterium-tritium fusions reaction, given by
 $$
 H^2 + H^3 \rightarrow \alpha + n + 17.6 MeV
 $$
-as it is more energetically favorable than the $D-D$ reaction by an order of 14 MeV per reaction. When detuterium and tritium fuse an $\alpha$ particle, or $He^4$ particle, and a neutron are released. %Show nuclear reaction math here?
-$14.1 MeV$ of the released binding energy is given to the neutron in the form of kinetic energy, and the remaining given to the $\alpha$ particle. 
-It can be shown that the operating temperatures of a fusion reactor starts at around 10KeV, which is well above the ionizing temperature of hyrdogen and helium, leading to deuterium-tritium fuel to becoming a plasma within a fusion reactor.\\
+as it is more energetically favorable than the $D-D$ reaction by an order of 14 MeV per reaction. When detuterium and tritium fuse, an $\alpha$ particle, or $He^4$ particle is released,as well neutron are released. %Show nuclear reaction math here?
+$14.1 MeV$ of the released binding energy is transferred to the neutron in the form of kinetic energy, with $3.5 MeV$ transferred to the $\alpha$ particle. \\
+To generate nuclear fusion reactions deuterium-tritium fuel is placed into a suitable reactor. The reactor provides initial heating power  to start the begin the nuclear fusion process. In an ideal system there is a critical plasma temperature that, once reached, implies that the $\alpha$ particles have enough energy to sustain the nuclear fusion reactions in a steady, allowing the initial heating source to be turned off.\\
 
- Fusion reactor design uses the energy of the $\alpha$ particle for maintaining the temperature of the plasma, while the energy of the neutron, which is allowed to escape the plasma into the blanket of the reactor, is responsible for heating and powering a stems turbine.
-For a fusion reactor to be viable as a power source, it must be take an initial heating input to develop a deuterium-tritium fuel source into a self sustaining plasma. 
-Self sustaining means that the $\alpha$ heating is able to balance the heat losses due to Bremsstrahlung radation, neutron espace, and ion diffusion out of the system.%Derive Threshold temperature here or later
-This balance is called the principal of power balance; it cannot be emphasized enough that meeting and maintaining power balance within a fusion reactor is critical to fusion power becoming a viable energy source.\\
-%The 0-D fluid conservation of energy equation is given by:
+Countering the heat produced by the $\alpha$ particles are the heat transport processes, thus a realistic operating temperature must account for the heat lost due to these heat transport mechanisms. The sources of heat or energy loss inside a plasma include Bremsstrahlung radiation, or charge acceleration resulting in radiation, diffusion through Coulombic interactions, and ion heat transport through micro-turbulence. In equation form, the balance of power between the $\alpha$ particle heating and all of the above heat sinks is given by
+$$
+S_{\alpha} = S_B + \chi\frac{\partial T}{\partial r}
+$$
+Where $S_{\alpha}$ is the $\alpha$ heating power, $S_B$ is the power lost by Bremsstrahlung radiation, and    $\chi\frac{\partial T}{\partial r}$ account for the heat transport out of the plasma, and $\chi$ is a general heat transport coefficient. 
+Since the majority of heat transport happens through ion heat conduction, I willl refer to $\chi$ as the ion heat transport coefficient from now on.\\
+This balance is referred to as power balance in a plasma, and must be met for the fusion reactions in a plasma reactor to become self-sustaining. This balance is dependent on three important reactor characteristics: the internal pressure generated by the magnetic fields, $p$, the confinement time of the plasma, $\tau$ and the temperature of the plasma. The minimum $\{p\tau,T\}$ pair is given by $\{p\tau,T\} = \{8.3 atm\ s, 15keV\}$\\%
+%\begin{figure}
+%\centering
+%\includegraphics[width = 3cm, height = 4cm]{Lorentz_MP}
+%\end{figure}
+%Working in toroidal geometry it would be wise to establish the coordinate system that is used to describe the trajectories of plasma in tokamak reactor. Below are two figured to establish the geometry I will be working in.
+
 %$$
 %\frac{3}{2}\frac{\partial p}{\partial t} + \frac{3}{2}\nabla \cdot p \vec{v} + p\nabla \cdot v + \nabla\cdot \vec{q} = S
 %$$
 %where the internal energy $U$ has been substituted for $\frac{3}{2}p$\cite{J_Friedberg:1}.\\
-One of the chief concerns in fusion reactor design is heat diffusing out of the magnetically confined region by way of ions, also referred to as ion heat diffusion. Ion heat diffusion is responsible for the majority of the heat lost by the plasma, and as such much attention has been paid to the mechanisms causing this heat loss.
-To illustrate the principal power balance let us look at 0-D conservation of energy equation for fluids. This equation is given by
-
-The plasma is contained within the inner cylinder of a toroid, with the first wall of the cylinder being protected by a strong magnetic field that shields the wall from thermal loading from the $14.1 MeV$ neutrons, Bremsstrahlung heat loss, and heat conduction. Inside the first wall is the region called the blanket and shield, which is the region of heat exchange for powering an external steam turbine, and provides a tritium breeding ground that sustains the supply of tritium required for the fusion reaction. Outside of this region is the a shield wall which prevents the escape of any radioactive neutrons or gamma particles. The final layer of the toroid contains the superconducting toroidal solenoid, which generates the $10-15 [T]$ magnetic field inside of the fusion reactor, which again is responsible for confining the ionic and electron components of the plasma inside the reactor. Figures 1 shows the generic theoretical cross-sectional area of toroidal reactor, while figure 2 shows the cross-sectional area of the ARIES-AT tokamak design.\\
-\\
-\begin{figure}[h]
-\begin{subfigure}[t*]{0.5\textwidth}
-\includegraphics{Basic_Reactor}
-\caption{Generic toroidal fusion reactor showing the plasma, blanket-and-shield, and magnets. Image Source J. Friedberg \cite{J_Friedberg:1} }
-\end{subfigure}
-\begin{subfigure}[t*]{0.5\textwidth}
-\includegraphics[width = 0.6\columnwidth]{ARIES_AT}
-\caption{Cross section of the ARIES-AT power core conﬁguration (courtesy of F. Najmabadi). \cite{J_Friedberg:1} }
-\end{subfigure}
-\end{figure}
-%%I need to explain the geometry of a Tokamak more clearly.
-%%
-\\
-Not shown in the picture is the center, or donut hole, of the toroidal reactor. In current reactors, there is an additional magnet in this region that produces a poloidal magnetic field, which when combined with the toroidal magnetic fields produces the magnetic field lines, as seen in figure 3. Due to the Lorentz force, this configuration of magnetic field lines manages to capture the majority of the diffusing ions and electrons in a helical tractory around the magnetic fields lines due to to the Lorentz force on the charged particles.
 \subsection{Diffusion, Neoclassical Theory, and Scaling Laws}
+There are 2 primary mechanisms that contribute to ion heat conduction out of the plasma.
+The first is neo-classical transport, which is classic transport caused by Coulombic interactions applied in a toroidal geometry, where the Coulombic collisions occur as the ions traverse along their polar orbit.
+Plasma heat conduction is considered to have been one of, if not the most, difficult challenges on the way to building a working reactor. This is because ion heat conduction is driven by plasma micro-turbulence, as such a full theory and model of heat transport must include micro-scale turbulent physics.This turbulence is driven by severe ionic thermal gradients, resulting in fluctuations in the electric and magnetic field that perturb the guiding center orbits of the ions about the magnetic field lines. This randomness in fluctuations  leads to collision like diffusion in particles and energy \cite{J_Friedberg:1}, and accounts for the majority of the diffusion. The models required to accurately simulate micro-turbulence are kinetic, requiring computationally expensive direct numerical simulations .\\
 
-Let's analyze this equation: The first term accounts for the variation of energy flowing into and out of the system with respect to time, the second term accounts for energy lost or gained due to convection of heat out of the system, the third term accounts for energy losses due to compression and expansion of the plasma within a reactor, the 4th term account for heat losses due to diffusion and conduction, and $S$ accounts for the sources and sinks available to the plasma. The sources are the $\alpha$ particle heating due to the D-T nuclear reaction and any auxiiliary heating being supplied to the plasma, while the sinks are the neutrons escaping the plasma into the blanket surrounding the reactor, and Bremsstrahlung radiation.\\
-%%
-\\
-Assuming that the power production in the reactor has reached a steady state the time term drops out, as well as the convection and compression terms, leaving the 0-D energy conservation equation:
+One of the primary methods for understanding the relationship between current plasma reactor research data and future reactor performance is to use scaling relationships. 
+If two systems are geometrically similar or dynamically similar, scaling relationships between the systems by dimensionalizing the system parameters, and scaling these parameters to the relevant size. 
+For example, if a small wind tunnel system comprised of an airfoil with an airflow over its surface has identical geometric ratios to a full size airfoil, and the dynamics of the flows over the flows are similar, then a scaling relationship between the boundary layer height can be made between the two systems.
+In the case of the ITER reactor, the scaling law of interest is the scaling relationship between the dimensionless reactor size, which is given by the dimensionless ratio $\rho^* = \rho_i/a$, and the ion heat conduction $\chi_i$.
+The power output of the nuclear fusion reactor is implicitly contained with the dimensionless radius.\\ 
+Predicting how heat conduction scales with reactor size is critical to designing and building ITER scale reactors, as the required input heating must be understood to maintain power balance in  ITER reactor.
+Current research \cite{Yas_Ido} have used full-function simulations, which include plasma micro-turbulence and collision phenomenon, to predict the scaling relationship between $\rho^*$ and $\chi_i$. The results of this study predicted a linear scaling relationship, which is undesireable, as this indicates that required heat input to maintain plasma temperature scales linearly with reactor size. This study was not complete, as the simulation as run on 1/6 of the full reactor size, with periodic boundary conditions implementd to generate a full reactor. Thiis leave the possibility for missing EM modes that are larger than 1/6 the size of the reactor. This research can be further developed by running a simulation on the full reactor to capture these missing modes, which is a part of the work that will be completed in this thesis.\\
+
+\subsection{Gyrokinetic Equations, XGC Code, and Heating Model}
+The mathematical model of the for a tokamak plasma is the 5-D gyrokinetic model, which is the Boltzmann equation with the Lorentz force substitued into the acceleration term, also known as the Vlasov-Boltzmann equation. This model a includes Maxwell's equations.
+\begin{gather*}
+\frac{df}{dt} = \frac{\partial f}{\partial t} + \bold{v}\cdot\nabla f + e(E + \bold{v}\times\bold{B})\cdot\frac{\partial f}{\partial \bold{v}} =C(f) + Source + Sink\\
+\nabla \cdot \bold{E_0} = \frac{\rho_c}{\epsilon_0}\\
+\nabla\cdot \bold{B}_0=0\\
+\nabla \times \bold{E}_0 = - \frac{\partial \bold{B}_0}{\partial t}\\
+\nabla\times \bold{B} = \frac{j}{\epsilon_0 c^2} + \frac{1}{c^2}\frac{\partial E_0}{\partial t}
+\end{gather*}
+The first term of the Vlasov-Boltzmann equation is the changing particle density as a function of time, the second term is the momentum transport term, and the second term is the energy transport term. C(f) is the collision operator, which includes the micro-turbulence fluctuations, and the sink includes the ionic heat diffusion out of the system. The rest of the equations are Maxwell's equations. 
+To implement this model, including the multiscale collision and turbulent physics, the XGC code was developed by the High Fidelity Boundary Physics Group. This code is capable of capturing full-function multiscale physics, and is the simulation that was used in previous research to determine the relationship between$\rho^*$ and $\chi_i$. The XGC code is a first principles, kinetic model, particle in cell code that takes in a particle location vector, and results in a particle and velocity distribution based on the physical constraints. The XGC simulation includes a heating model component that takes the position distribution and velocities of the particles from the XGC results, and translates these outputs into the ion heat diffusivity through the following equations
+
 $$
-\nabla\cdot \vec{q} = S.
-$$
-This equation makes intuitive sense. In equillibrium, if the diffusive processes are matched by the power sources sources and sinks, then a power balance will be achieved in the equation. If the diffusion of heat out of the system increases,  $\alpha$ particle heating has to increase to maintain power balance in the reactor, decreasing the efficiency of the reactor. \\ %Is this the correct interpretation of this equation?\\
-%%
-%%
-Maintaining a plasma reactor with a viable power output requires that the transport of heat out of the plasma be balanced by the alpha heating power of the plasma. Characterizing the heat conduction parameter, or ion heat diffusivity $\chi_i$, in a plasma is current research, \cite{Yas_Ido} \cite{choong-seock_chang_et_al_partnership_2017} as it is the primary heat loss mechanism in a tokamak reactor. Per Friedberg “In a plasma there are three important types of transport: heat conduction, particle diffusion, and magnetic ﬁeld diffusion. Of these, heat conduction is the most serious loss mechanism... \cite{J_Friedberg:1}." \\
-
-Classic and neoclassical diffusion model the ion heat diffusivity using a random walk model of the ions and electrons as they move through their gyrokinetic trajectory around the magnetic field lines in the toroidal reactor, interacting with other charged species along their trajectory, and imparting thermal energy. Neoclassical transport theory refers to the diffusion process within a toroidal geometry, which generates for a 2.4 fold increase in ion heat diffusion.\\
-The classical and neoclassical models are unable to account for the observed, anomalously large transport of energy and particles across the confining magnetic field. It is assumed that that the anomolous ionic thermal diffusivity is a function of various local dimensionless quantities, including $\beta$ the ratio of plasma to magnetic  pressure, $\rho^*$, which is explained below.  Current research \cite{Yas_Ido} focuses on plasma microturbulence caused by steep ionic thermal gradients as the driving mechanism for this anomalous heat transport, and incorporates scaling arguments in $\rho^*$ to make predictions using available data from smaller scale fusion reactors to predict how ion heat diffusivity will scale to ITER levels. Scaling laws are laws used in fluid dynamics that are allowed to be made under dynamic and geomtric similarity situations, thus since the dynamics and geometries between tokamaks is nearly identical, scaling laws are useful when experimental validation is not available.\\
-
-We define $\rho^*$ to be $\rho^* = \rho_i/a$ where $\rho_i$ is the gyrokinetic radius of the ion as it moves around the magnetic field in its trajectors through the fusion reactor, and $a$ is the minor radius of the tokamak, or the radius of the inner cross-sectional area of the tokamak. The reason that $\rho^*$ is interesting is because "Existing experimental devices can match all of these transport relevant dimensionless parameters expected in a reactor scale with the exception of $\rho^*$ \cite{McKee_Et}." The inability to set the parameter $rho^*$ in a lab experiment, and the advanced modeling and simulation capabilities of current tech, make a new study on ionic thermal diffusivity an ideal topic for a master's thesis\\
-
-Thus, the stated purpose of this thesis is to determine how the ionic thermal diffusivity scales with a scan in $\rho^*$ up to ITER scales, to determine whether the diffusion becomes Bohm or gyro-Bohm like. Bohm diffusion indicates that the diffusion increases linearly with temperature, and is undesireable, while gyro-Bohm diffusion indicates that the  diffusion scales sublinearly with temperature, and is desireable.
-%%Add More Detail Above
-
-%%This may be redundant with later material
-
-We will use available experimental fusion reactor data, and implement surrogate modeling techniques to reduce the computational expense of running a simulation of 5-D  gyrokinetic model  of a plasma within a tokamak reactor, which is the geometr of the ITER reactor. The outcome of this project will be a pdf of the ion diffusion, with uncertainties. Once this is accomplished, if time permits, we will perform a %push forward 
-comprehensive sensitivity analysis of the heating model.
-
-\subsection{Gyrokinetic Equations}
-The complete derivation of the governing set of equations of multi-scale physics in a tokamak reactor is well beyond the scope of this paper. However, the important physics that are described by the governing equations should be covered for clarity and reference. The governing set of equations of a plasma are called the Vlasov-Boltzmann equations and are provided below: 
+T_i = \frac{1}{3}\sum_{x_j \in \Delta V}w_jm_i(2B\mu+(v_{||j} - u_{||})^2)/W\\
 $$
 $$
-The first equation is the Boltzmann convection-collision equation  modified for an electromagnetic system. Since the majority of the interactions in a plasma are Coulombic interactions, and they dominate the characteristics of the plasma, the collision term from the full Boltzmann eqution is ignored. The Vlasov equation decribes how the plasma is going to travel due to external forces acting on the plasma.
-\subsection{XGC Code \& Heating Models}
-\section{Experimental Metholodogy}
+q_{i\Psi N} = \frac{1}{2}\sum_{X_j \in \Delta V}m_i(2B\mu+(v_{||j} - u_{||})^2)\dot{\bold{X}}\cdot \nabla \Psi /W\\
+$$
+$$
+\chi_i = q_{i \psi}/(|\nabla|^2\frac{\partial T}{\partial \Psi}).\\
+$$
+Where $\Delta V$ is the volume,  $\Psi$ is the spatial domain, $m_i$, $q_{i\Psi}$, and $\chi_i$ are the particle masses, heat flux in $\Psi$ space, and $chi_i$ is the thermal conductivity of the ions. $w_i$ and W are individual weights and the sums of these weights,  $\dot{\bold{X}}$ is a vector of the particle velocities, $v_{||j},  u_{||}$ are the velocities that are parallel to the magnetic fields, and the average of these velocities, respectively. Thus, the diffusion coefficient is solved for.\\
 
-\section{Prediction under Uncertainty}
+While the XGC code is a full-f simulation, and is self consistent, it is computationally expensive, requiring 15,000-25,000 cpu's to run simulations for $DIII-D$ scales experimental reactors. ITER simulations require extreme scale somputing at the level of Titan, Edison and, Mira, and even at these scales requires a full day to complete one simulation. Characterizing uncertainty ini $\chi_i$  requires multiple simulation runs with data under uncertainty in order to propagate uncertainty through the model. To reduce the computational expense characterizing $chi_i$ I propose the development of a surrogate heating model that is trained on the output of limited, already performed runs from the full-f simulation. The full details on the experimental methodology to be used can be found in the folowing section.
+
+To reiterate the stated outcome of this thesis, the primary goal of this thesis is to computationally develop the scaling relationship between ionic heat conduction, $\chi_i$, and the dimensionless reactor size $\rho^* = \rho_i/a$ by developing a surrogate model that is trained on the outputs of the full-f XGC model.
+
+
+
+
+%Define a random walk model explain neo-classical diffusion model.
+
+
+\section{Experimental Methodology}
 \input{uq_section}
 
 <<<<<<< HEAD
@@ -131,39 +123,8 @@ The first equation is the Boltzmann convection-collision equation  modified for 
 %\section{Motivation for Performing Study}
 %>>>>>>> 6f21f4ca132eabe95ad55dea398ef4f20d0aadf1
 
-The {\em augmented surrogate} is a surrogate model $A(\theta,d)$ constructed on training data $\{(\theta,d),\hat{Q}(\theta,d)\}$ in the $m+n$-dimensional
-parameter space.   %We briefly illustrate this approach via the following numerical cartoon.
-
-\subsubsection*{Adaptive sparse grid method}  
-The classical sparse grid method is dimension agnostic \cite{Bungartz}. All interactions
-of the same order are treated equally. Often, a small subset of variables
-and interactions contributes significantly to the variability of the function $Q(\theta,d)$.  If the variability in the $\theta$-dimensions is
-greater than the variability in the scenario parameters($\{d_i\}$) then the overall cost of constructing the 
-larger dimensional surrogate is actually less, due to the cheaper computational cost of $\tilde{Q}_i$.
-
-We modify the 
-greedy algorithm for constructing $h$-adaptive generalized sparse grid (h-GSG) in \cite{Jakeman2011LocalAD}.
-The hierarchical surpluses for the current sparse grid are modified with a cost weight $W_C(d_1,d_2,\ldots,d_m)$ that approximates the relative
-cost of simulating the added sparse grid point, and a $m$-dimensional distance metric that penalizes sparse grid
-samples that are too far away from the prediction scenario $Q(\theta)$.  This encourages parameter exploration in $\theta_i$-dimensions at
-inexpensive simulation levels, while rewarding coarse grid points that reduce the local surrogate error near the prediction scenario $Q(\theta)$.  
-
-\subsection{Proposed UQ Study}
-We will conduct a base parameter scan in $(\rho_*)$, at the mean values of the uncertain inputs.  This will verify that wedge, Eulerian versus PIC, or other factors do not impact the conclusions reached in \cite{Yas_Ido}.  This scan will also provide the first training runs for
-the augmented surrogate $A$.  
-
-Data from a range of $\rho^{-1}_*$ simulations will be obtained in the interval (100,600) will be provided by Varis Carey and other members
-of the BPS Scidac team  from simulations run at NERSC and Oak Ridge facilites.  A budget of 20,000 SU at NERSC has been allocated for providing the data for this scaling study(which is already partially complete at the time of this proposal)
- and for additional simulations to train the augmented surrogate to cover the input parameter space.
-The main input parameters parameterize the location, slope, and shape of the core heat source and boundary sink.  Additional parameters covering
-torque will be allowed if the computational budget allows further investigation.  If NERSC resources are expended, certain (small-scale)
-simulations will be conducted on CU-Denver or RMCC resources(Summit) under the supervision of Varis Carey.
-
-\subsubsection*{Postprocessing Software}
-Postprocessing software (python and Matlab) are available to extract plasma QoI from  XGC 2D and 1D diagnostic output.  The BPS team will
-arrange a NERSC account to avoid transfer of large binary files and allow simulation data to be repurposed for future studies.
-\section{Educational Methodology}
-In order to familiarize myself with the above experimental methods, I propose the following framework constructed of seeting up a toy problem, and implementing. First numerically evaluating a familiar PDE model using a finite difference method-  possibly the 1-D diffusion equation or the 1-D neutron transport equation - then propogating the uncertainty of the parameters through the model to develop a distribtuion of the quantity of interest. The neutron diffusion model is appealing as there are libraries available on the distribution of the nuclear cross-section that can be used for uncertainty quantification \cite{Smith}.\\
+\section{Educational Exercises}
+In order to familiarize myself with the above experimental methods, I propose the following framework constructed of setting up a toy problem, and implementing said toy problem. First numerically evaluating a familiar PDE model using a finite difference method-  possibly the 1-D diffusion equation or the 1-D neutron transport equation - then propogating the uncertainty of the parameters through the model to develop a distribtuion of the quantity of interest. The neutron diffusion model is appealing as there are libraries available on the distribution of the nuclear cross-section that can be used for uncertainty quantification \cite{Smith}.\\
 %%
 After creating a blackbox to generate the quantity of interest under uncertainty, I can then use these generated quantities along with the avilable inputs to construct a surrogate model using methods of linear or nonlinear regression. The quadratic response surface model has been identified as a surrogate modeling method to perform this task. After constructing said surrogate model, the approximate quantity of interest can be compared to the quantity of interest of the real model, with statistics and correlations run on the QoI's. The surrogate models will be run under uncertainty as well, with a statistical comparison run on QoI distribution.To achieve a more accurate surrogate model, I will update the surrogate model based on the QoI distribution.\\
 %%
