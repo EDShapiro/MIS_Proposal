@@ -11,125 +11,34 @@
 \usepackage[margin=1.25in]{geometry}
 \linespread{2.0}
 \graphicspath{ {c:/Users/EvanD/OneDrive/Pictures/Thesis/}}
-\title{Integrated Science Thesis Proposal}
-\author{Evan Shapiro \\ Master's of Integrated Science, University of Colorado Denver}
+
+\title{Predicting the Scaling Relationship Between Ion Heat Conduction and Plasma Reactor Size Under Uncertainty Using Surrogate Models }
+\author{Evan Shapiro \\ Master of Integrated Science, University of Colorado Denver}
+
 \begin{document}
-\begin{abstract}
-Ion diffusion at ITER scales must beGlobal gyrokinetic models have been shown to accurately predict the ion diffusivity by incorporating microturbulence into the models, $\chi_i$.
-Extreme-scale, fixed-flux supercomputing simulations are beginning
-to simulate modes of operation relevant to next-generation(ITER,DEMO)
-reactors. Using a surrogate model to reduce the computational expense of XGC simulations, I conduct a predictive scan
-in $\rho^{-1}$ , to ascertain
-whether or not the ion diffusivity $\chi_i$ scales in a Bohm or gyro-Bohm
-fashion, and analyze the sensitivity of $\chi_i$ to perturbation in the heating
-model.% in the $XGC$ model.
-\end{abstract}
+
+\input{Abstract}
 
 \maketitle
+
 \tableofcontents
 
-
-
-
-\section{Introduction}
-
-\subsection{Magnetically Confined Fusion}
-The history of nuclear fusion research dates back to the 1920's, when Arthur Eddington suggested in his book "The Internal Constitution of Stars" that the transmutation of hydrogen atoms through nuclear fusion into helium is responsible for powering the energy released by the sun.% \cite{ITER_1}\cite{Eddington}.
-In 1934, Ernest Rutherfor and his assistant Mark Oliphant succesfully fused deuterium by generating voltages of 400,000V, colliding deuterium atoms with duterium atoms.
-They reported a net release of binding energy of $4MeV$ per $D-D$ reaction, making it an energetically favorable.%\cite[Rutherford_Oliphant]. $% their aritcle, "Transmutation Effects Observed with Heavy Hydrogen",\\
-In his 1939 article, "Energy Production in Stars", Hans Bethe posited that only 2 elements lighter than carbon were stable for a long enough period of time to provide a fuel source for the nuclear fusion reactions that take place in faint stars: $H^2$ and $He^4$. 
-$He^4$ is in fact too stable an element to be a solar fuel source, indicating that the nuclear reactions in stars could only be explained by a 
-$$
-H^2-H^2 \rightarrow He^3 + n
-$$ 
-reaction.\\%
-Research dedicated to producing and controlling nuclear fusion reactions, as a method of power and energy production, led to the U.S., Russia, France and Japan building fusion reactos in the 1950s. In 1958 Russian scientists built the first tokamak fusion reactor, a toroid shaped reactor which is the Russian translation of "Toroidal Chamber with Magnetic Coils." The toroidal design is the standard in fusion reactor design as the toroidal shape is ideally suited to the magnetic fields required to confine a plasma. Please see the first figure for a tokamak design image. Today, international research and development support from over 30 member countries is being dedicated to the tokamak International Thernuclear Experimential Reactor (ITER), which is being built in Cadarache, France. ITER is a full-scale experimental reactor that is the final step before building a demonstrative reactor (DEMO), with the goal of developing a full theory of plasma within an ITER scale fusion reactor, and solving all the engineering problems related a working fusion reactor.\\
-Current fusion research focuses on the the deuterium-tritium fusions reaction, given by
-$$
-H^2 + H^3 \rightarrow \alpha + n + 17.6 MeV
-$$
-as it is more energetically favorable than the $D-D$ reaction by an order of 14 MeV per reaction. When detuterium and tritium fuse, an $\alpha$ particle, or $He^4$ particle is released,as well neutron are released. %Show nuclear reaction math here?
-$14.1 MeV$ of the released binding energy is transferred to the neutron in the form of kinetic energy, with $3.5 MeV$ transferred to the $\alpha$ particle. \\
-To generate nuclear fusion reactions deuterium-tritium fuel is placed into a suitable reactor. The reactor provides initial heating power  to start the begin the nuclear fusion process. In an ideal system there is a critical plasma temperature that, once reached, implies that the $\alpha$ particles have enough energy to sustain the nuclear fusion reactions in a steady, allowing the initial heating source to be turned off.\\
-
-Countering the heat produced by the $\alpha$ particles are the heat transport processes, thus a realistic operating temperature must account for the heat lost due to these heat transport mechanisms. The sources of heat or energy loss inside a plasma include Bremsstrahlung radiation, or charge acceleration resulting in radiation, diffusion through Coulombic interactions, and ion heat transport through micro-turbulence. In equation form, the balance of power between the $\alpha$ particle heating and all of the above heat sinks is given by
-$$
-S_{\alpha} = S_B + \chi\frac{\partial T}{\partial r}
-$$
-Where $S_{\alpha}$ is the $\alpha$ heating power, $S_B$ is the power lost by Bremsstrahlung radiation, and    $\chi\frac{\partial T}{\partial r}$ account for the heat transport out of the plasma, and $\chi$ is a general heat transport coefficient. 
-Since the majority of heat transport happens through ion heat conduction, I willl refer to $\chi$ as the ion heat transport coefficient from now on.\\
-This balance is referred to as power balance in a plasma, and must be met for the fusion reactions in a plasma reactor to become self-sustaining. This balance is dependent on three important reactor characteristics: the internal pressure generated by the magnetic fields, $p$, the confinement time of the plasma, $\tau$ and the temperature of the plasma. The minimum $\{p\tau,T\}$ pair is given by $\{p\tau,T\} = \{8.3 atm\ s, 15keV\}$\\%
-%\begin{figure}
-%\centering
-%\includegraphics[width = 3cm, height = 4cm]{Lorentz_MP}
-%\end{figure}
-%Working in toroidal geometry it would be wise to establish the coordinate system that is used to describe the trajectories of plasma in tokamak reactor. Below are two figured to establish the geometry I will be working in.
-
-%$$
-%\frac{3}{2}\frac{\partial p}{\partial t} + \frac{3}{2}\nabla \cdot p \vec{v} + p\nabla \cdot v + \nabla\cdot \vec{q} = S
-%$$
-%where the internal energy $U$ has been substituted for $\frac{3}{2}p$\cite{J_Friedberg:1}.\\
-\subsection{Diffusion, Neoclassical Theory, and Scaling Laws}
-There are 2 primary mechanisms that contribute to ion heat conduction out of the plasma.
-The first is neo-classical transport, which is classic transport caused by Coulombic interactions applied in a toroidal geometry, where the Coulombic collisions occur as the ions traverse along their polar orbit.
-Plasma heat conduction is considered to have been one of, if not the most, difficult challenges on the way to building a working reactor. This is because ion heat conduction is driven by plasma micro-turbulence, as such a full theory and model of heat transport must include micro-scale turbulent physics.This turbulence is driven by severe ionic thermal gradients, resulting in fluctuations in the electric and magnetic field that perturb the guiding center orbits of the ions about the magnetic field lines. This randomness in fluctuations  leads to collision like diffusion in particles and energy \cite{J_Friedberg:1}, and accounts for the majority of the diffusion. The models required to accurately simulate micro-turbulence are kinetic, requiring computationally expensive direct numerical simulations .\\
-
-One of the primary methods for understanding the relationship between current plasma reactor research data and future reactor performance is to use scaling relationships. 
-If two systems are geometrically similar or dynamically similar, scaling relationships between the systems by dimensionalizing the system parameters, and scaling these parameters to the relevant size. 
-For example, if a small wind tunnel system comprised of an airfoil with an airflow over its surface has identical geometric ratios to a full size airfoil, and the dynamics of the flows over the flows are similar, then a scaling relationship between the boundary layer height can be made between the two systems.
-In the case of the ITER reactor, the scaling law of interest is the scaling relationship between the dimensionless reactor size, which is given by the dimensionless ratio $\rho^* = \rho_i/a$, and the ion heat conduction $\chi_i$.
-The power output of the nuclear fusion reactor is implicitly contained with the dimensionless radius.\\ 
-Predicting how heat conduction scales with reactor size is critical to designing and building ITER scale reactors, as the required input heating must be understood to maintain power balance in  ITER reactor.
-Current research \cite{Yas_Ido} have used full-function simulations, which include plasma micro-turbulence and collision phenomenon, to predict the scaling relationship between $\rho^*$ and $\chi_i$. The results of this study predicted a linear scaling relationship, which is undesireable, as this indicates that required heat input to maintain plasma temperature scales linearly with reactor size. This study was not complete, as the simulation as run on 1/6 of the full reactor size, with periodic boundary conditions implementd to generate a full reactor. Thiis leave the possibility for missing EM modes that are larger than 1/6 the size of the reactor. This research can be further developed by running a simulation on the full reactor to capture these missing modes, which is a part of the work that will be completed in this thesis.\\
-
-\subsection{Gyrokinetic Equations, XGC Code, and Heating Model}
-The mathematical model of the for a tokamak plasma is the 5-D gyrokinetic model, which is the Boltzmann equation with the Lorentz force substitued into the acceleration term, also known as the Vlasov-Boltzmann equation. This model a includes Maxwell's equations.
-\begin{gather*}
-\frac{df}{dt} = \frac{\partial f}{\partial t} + \bold{v}\cdot\nabla f + e(E + \bold{v}\times\bold{B})\cdot\frac{\partial f}{\partial \bold{v}} =C(f) + Source + Sink\\
-\nabla \cdot \bold{E_0} = \frac{\rho_c}{\epsilon_0}\\
-\nabla\cdot \bold{B}_0=0\\
-\nabla \times \bold{E}_0 = - \frac{\partial \bold{B}_0}{\partial t}\\
-\nabla\times \bold{B} = \frac{j}{\epsilon_0 c^2} + \frac{1}{c^2}\frac{\partial E_0}{\partial t}
-\end{gather*}
-The first term of the Vlasov-Boltzmann equation is the changing particle density as a function of time, the second term is the momentum transport term, and the second term is the energy transport term. C(f) is the collision operator, which includes the micro-turbulence fluctuations, and the sink includes the ionic heat diffusion out of the system. The rest of the equations are Maxwell's equations. 
-To implement this model, including the multiscale collision and turbulent physics, the XGC code was developed by the High Fidelity Boundary Physics Group. This code is capable of capturing full-function multiscale physics, and is the simulation that was used in previous research to determine the relationship between$\rho^*$ and $\chi_i$. The XGC code is a first principles, kinetic model, particle in cell code that takes in a particle location vector, and results in a particle and velocity distribution based on the physical constraints. The XGC simulation includes a heating model component that takes the position distribution and velocities of the particles from the XGC results, and translates these outputs into the ion heat diffusivity through the following equations
-
-$$
-T_i = \frac{1}{3}\sum_{x_j \in \Delta V}w_jm_i(2B\mu+(v_{||j} - u_{||})^2)/W\\
-$$
-$$
-q_{i\Psi N} = \frac{1}{2}\sum_{X_j \in \Delta V}m_i(2B\mu+(v_{||j} - u_{||})^2)\dot{\bold{X}}\cdot \nabla \Psi /W\\
-$$
-$$
-\chi_i = q_{i \psi}/(|\nabla|^2\frac{\partial T}{\partial \Psi}).\\
-$$
-Where $\Delta V$ is the volume,  $\Psi$ is the spatial domain, $m_i$, $q_{i\Psi}$, and $\chi_i$ are the particle masses, heat flux in $\Psi$ space, and $chi_i$ is the thermal conductivity of the ions. $w_i$ and W are individual weights and the sums of these weights,  $\dot{\bold{X}}$ is a vector of the particle velocities, $v_{||j},  u_{||}$ are the velocities that are parallel to the magnetic fields, and the average of these velocities, respectively. Thus, the diffusion coefficient is solved for.\\
-
-While the XGC code is a full-f simulation, and is self consistent, it is computationally expensive, requiring 15,000-25,000 cpu's to run simulations for $DIII-D$ scales experimental reactors. ITER simulations require extreme scale somputing at the level of Titan, Edison and, Mira, and even at these scales requires a full day to complete one simulation. Characterizing uncertainty ini $\chi_i$  requires multiple simulation runs with data under uncertainty in order to propagate uncertainty through the model. To reduce the computational expense characterizing $chi_i$ I propose the development of a surrogate heating model that is trained on the output of limited, already performed runs from the full-f simulation. The full details on the experimental methodology to be used can be found in the folowing section.
-
-To reiterate the stated outcome of this thesis, the primary goal of this thesis is to computationally develop the scaling relationship between ionic heat conduction, $\chi_i$, and the dimensionless reactor size $\rho^* = \rho_i/a$ by developing a surrogate model that is trained on the outputs of the full-f XGC model.
-
-
-
+\input{Introduction}
 
 %Define a random walk model explain neo-classical diffusion model.
-
 
 \section{Experimental Methodology}
 \input{uq_section}
 
-<<<<<<< HEAD
-%
-%\section{Motivation for Performing Study}
-%>>>>>>> 6f21f4ca132eabe95ad55dea398ef4f20d0aadf1
+\input{Lit_Review}
 
-\section{Educational Exercises}
-In order to familiarize myself with the above experimental methods, I propose the following framework constructed of setting up a toy problem, and implementing said toy problem. First numerically evaluating a familiar PDE model using a finite difference method-  possibly the 1-D diffusion equation or the 1-D neutron transport equation - then propogating the uncertainty of the parameters through the model to develop a distribtuion of the quantity of interest. The neutron diffusion model is appealing as there are libraries available on the distribution of the nuclear cross-section that can be used for uncertainty quantification \cite{Smith}.\\
-%%
-After creating a blackbox to generate the quantity of interest under uncertainty, I can then use these generated quantities along with the avilable inputs to construct a surrogate model using methods of linear or nonlinear regression. The quadratic response surface model has been identified as a surrogate modeling method to perform this task. After constructing said surrogate model, the approximate quantity of interest can be compared to the quantity of interest of the real model, with statistics and correlations run on the QoI's. The surrogate models will be run under uncertainty as well, with a statistical comparison run on QoI distribution.To achieve a more accurate surrogate model, I will update the surrogate model based on the QoI distribution.\\
-%%
-The understand the complexity associated with scaling into N-D, as we will in this project, the finite difference model will progressively be scaled from 1-D to N-D. The above framework for uncertainty quantification and surrogate model creation and evaluation will be performed as the dimensionality of the system is increased. My thesis will contain all of this information as a guiding example for the actual research being performed.\\
+\input{Educational_Methodology}
 
+\newpage
+%% Bibliography Start
+\bibliographystyle{ieeetr}
+\bibliography{Bibli}
+\end{document}
 % Go through details on push forward scanning using a surrogate model.
 
 %The relationship between ion diffusivity, $\chi_i$, and the dimensionless radius $\rho*$ is given by
@@ -137,16 +46,16 @@ The understand the complexity associated with scaling into N-D, as we will in th
 %\chi_i = (cT_e/|e|B )\rho*^{x_p}F(v_*, \beta, q_{\phi}, T_e/T_i, ...).
 %$$
 %
-%The first coefficient is the Bohm diffusivity function, where $c$ is the speed of light in the plasma, $T_e$ is the electron temperature $e$ is the electron charge, and B is the perpendicular magnetic field. The second coefficient contains the dimensionless radius, where the exponent $x_p$ determines the scaling of the ion diffusivity with respect to the dimensionless radius. The third coefficient is the dimensinless group formed by all of the relevant parameters.\\
+%The first coefficient is the Bohm diffusivity function, where $c$ is the speed of light in the plasma, $T_e$ is the electron temperature $e$ is the electron charge, and B is the perpendicular magnetic field. The second coefficient contains the dimensionless radius, where the exponent $x_p$ determines the scaling of the ion diffusivity with respect to the dimensionless radius. The third coefficient is the dimensionless group formed by all the relevant parameters.\\
 %\subsection{Methods of Reduced Order Models to Characterize Ion Heat Diffusion}
 
 %
-%  During this research project I will be focusing on the ion heat diffusivity, $\chi_i$, in a Tokamak reactor through the ion temperature gradient (ITG). I will be studying  scaling properties of the ITG with respect to the dimensionless number  $\rho* = \frac{\rho_i}{a}$, with $\rho* << 1$, and where $\rho_i$ is the ion gyroradius, or Larmor radius, and $a$ is the minor radius of a Tokamak reactor.\\
+% During this research project I will be focusing on the ion heat diffusivity, $\chi_i$, in a Tokamak reactor through the ion temperature gradient (ITG). I will be studying scaling properties of the ITG with respect to the dimensionless number $\rho* = \frac{\rho_i}{a}$, with $\rho* << 1$, and where $\rho_i$ is the ion gyro radius, or Larmor radius, and $a$ is the minor radius of a Tokamak reactor.\\
 
 
-%Most research on the scaling of ion heat diffusivity is concerned with determining the exponential relationship between,  $\chi_i$ and $\chi_B\rho*^{n}$. $\chi_B = $ Bohm diffusivity function if the   on  I am interested in studying the scaling behavior of the ion diffusivity with respect to $\rho$, as it has been established that the scaling can be Bohm like, or $\chi_i \propto  \rho*^0$, or  The scaling properties of the ion diffusivity in a n, as if the diffusion scales in a Bohm (linear) fashion with respect to $\rho_*$ then the chan
+%Most research on the scaling of ion heat diffusivity is concerned with determining the exponential relationship between, $\chi_i$ and $\chi_B\rho*^{n}$. $\chi_B = $ Bohm diffusivity function if the one I am interested in studying the scaling behavior of the ion diffusivity with respect to $\rho$, as it has been established that the scaling can be Bohm like, or $\chi_i \propto \rho*^0$, or The scaling properties of the ion diffusivity in a n, as if the diffusion scales in a Bohm (linear) fashion with respect to $\rho_*$ then the chan
 
-%he  is definedwhich is evaluated by studying the ion temperature gradient (ITG). It has been established that the ion heat diffusivity scales with respect to variables such as the plasma temperature and the cross-sectional radius of the reactor core. If the scaling of the ion diffusivity is  In a fusion reactor we are interested in the scaling properties of the ion diffusivity with respect to the dimensionless parameter $\rho* = \frac{\rho_i}{a}$, where $rho_i$ is the ionic gyroradius, and $a$ is the minor radius. If the scaling of the ion heat difussivity It is possible for a power discrepancy of this nature to occur if the thermal conduction, or ion diffusivity, scales linearly with the temperature of the It has been shown that thermal conduction of ions out of the plasma have the potential scale in a Bohm fashion with respect to the minor radius of a Tokamak reactor.
+%he is definedwhich is evaluated by studying the ion temperature gradient (ITG). It has been established that the ion heat diffusivity scales with respect to variables such as the plasma temperature and the cross-sectional radius of the reactor core. If the scaling of the ion diffusivity is In a fusion reactor we are interested in the scaling properties of the ion diffusivity with respect to the dimensionless parameter $\rho* = \frac{\rho_i}{a}$, where $rho_i$ is the ionic gyroradius, and $a$ is the minor radius. If the scaling of the ion heat difussivity It is possible for a power discrepancy of this nature to occur if the thermal conduction, or ion diffusivity, scales linearly with the temperature of the It has been shown that thermal conduction of ions out of the plasma have the potential scale in a Bohm fashion with respect to the minor radius of a Tokamak reactor.
 
 %\section{Motivation}
 %
@@ -160,179 +69,15 @@ The understand the complexity associated with scaling into N-D, as we will in th
 %
 %Once a magnetically confined plasma reaches a heating threshold value the plasma transitions from a low-confinement mode (L-Mode) to a high-confinement mode (H-Mode). After L-H transition occurs, a steep pedestal in the plasma density develops in the plasma boundary region, as can be seen in figure 2.2. This transition brings a reduction in the radially directed electric field, as well as a reduction in the turbulence intensity, which in turn reduces heat transport, This reduction in turbulent transport leads to an increased heating in the ion core of the plasma by "a factor that is proportional to the temperature at the top of the pedestal." \cite{PPPL_P:2} The increased heating leads to a 2-3 fold increase in plasma power production, making the H-mode is the desired operating mode for future fusion reactors.\\
 %
-%Operating in H-mode requires a stable pedestal. However, the steep density gradient “acts as a source of free energy for the magnetohydrodynamic plasma edge localized modes (ELM),” \cite{PPPL_P:2}  in which the pedestal repeatedly “crashes”, yielding bursts of plasma towards the divertor plates. A proposed solution to this problem is to use stochastic magnetic fields to stabilize steep gradient in the boundary region, and thus control the edge localized modes.\\
+%Operating in H-mode requires a stable pedestal. However, the steep density gradient “acts as a source of free energy for the magnetohydrodynamic plasma edge localized modes (ELM),” \cite{PPPL_P:2} in which the pedestal repeatedly “crashes”, yielding bursts of plasma towards the divertor plates. A proposed solution to this problem is to use stochastic magnetic fields to stabilize steep gradient in the boundary region, and thus control the edge localized modes.\\
 %
-%The Partnership seeks to understand  the L-H transition, pedestal structure, and  the requirements for ELM stability and control.  The plasma behavior in the boundary region is non-Maxwellian, and has non-equillibrium characteristics, requiring a first principles, 5-D gyrokinetic model, that simulates multiscale edge Tokamak plasma physics. Simulations include: The code used  (XGC), which is a particle in cell (PIC) code, requiring extreme high performance computing (HPC) to run a full plasma simulation.
+%The Partnership seeks to understand the L-H transition, pedestal structure, and the requirements for ELM stability and control. The plasma behavior in the boundary region is non-Maxwellian, and has non-equillibrium characteristics, requiring a first principles, 5-D gyrokinetic model, that simulates multiscale edge Tokamak plasma physics. Simulations include: The code used (XGC), which is a particle in cell (PIC) code, requiring extreme high performance computing (HPC) to run a full plasma simulation.
 %
-%One of the Modeling and simulating the magnetically confined plasma in the boundary region is incredibly imporant to progressing plasma research due to the difficulty of collecting data from inside a nuclear reactor.\cite{Smith_UQ:3} The complexity of the  XGC code requires computational resources of the scale of Titan Cray XK at Oak Ridge National Laboratory. To reduce the computational complexity  to utilize surrogate methods to reduce the complexity of the models in order to more efficiently analyze the scaling of the ion diffusivity of the plasma. Constructing a surrogate model allows us to captures the primary behavior of the modeled process, and is sufficiently efficient for model validation and uncertainty propagation.  \cite{Smith_UQ:3}. To determine input parameters, boundary conditions and initial conditions, data from the C-Mod fusion reactor are analyzed in a probabilistic framework, in a process called model calibration. 
+%One of the Modeling and simulating the magnetically confined plasma in the boundary region is incredibly imporant to progressing plasma research due to the difficulty of collecting data from inside a nuclear reactor.\cite{Smith_UQ:3} The complexity of the XGC code requires computational resources of the scale of Titan Cray XK at Oak Ridge National Laboratory. To reduce the computational complexity to utilize surrogate methods to reduce the complexity of the models in order to more efficiently analyze the scaling of the ion diffusivity of the plasma. Constructing a surrogate model allows us to captures the primary behavior of the modeled process, and is sufficiently efficient for model validation and uncertainty propagation. \cite{Smith_UQ:3}. To determine input parameters, boundary conditions and initial conditions, data from the C-Mod fusion reactor are analyzed in a probabilistic framework, in a process called model calibration. 
 %
 % \cite{PPPL_P:2}
 %The boundary physics of a magnetically confined plasma within a reactor are tied to variety of parameters. The parameter of interest for this study is the ion diffusivity 
 %As such, a bird's eye view of the current research being performed in the field of plasma physics will be presented. \cite{J_Friedberg:1}
 %This will be followed by a an overview of the diffusion model that will be explored in this paper.\\
 
-\section{Literature Review for MIS Thesis Proposal}
-
-
-Determining the plasma size scaling of the ion diffusivity, and performing efficient sensitivity analysis on the ion diffusivity in the heating component of the XCG model, within a constructed surrogate model, will require a knowledge base in the following subjects.\\  
-
-\subsection*{Physics}
-
-A background in plasma physics, and the component of the XCG model that is used to model plasma heating and ion diffusivity. To support my physical understanding while completing this research I have identified the following references.\\
-\begin{description} %\begin{separation} must be directly above first item for some reason
-
-\item[Plasma Physics and Fusion Reactors]\hfill
-
-\subitem[Jeffrey P. Friedberg – Plasma Physics and Fusion Energy]\\
-	This textbook covers the physics of plasma fusion, its applications as an energy sources, the physical requirements to create an energy producing fusion reactor, and the designs requirements for fusion reactor with a toroidal geometry - the geometry of the ITER 		fusion reactor.\\
-
-\item[Gyrokinetic Plasma Simulation]\hfill
-
-	Plasma Modeling Methods and Applications - Textbook\\
-	This is a modern textbook that covers kinetic theory plasma models, fluid equations and hybrid plasma models, and applications of these models.
-	 Each model is developed from first principles, making this an invaluable source for understanding the 5-D 		gyrokinetic model,
- 	as well as a good source for the developing and implementing the models that were discussed in the educational section of this proposal.\\
-	
-	Dr. Wei-Lee from the Princeton Plasma Fusion Physics Laboratory has posted the lecture notes and homework assignments from a course on “Theory and Modeling of Kinetic Plasmas” on his website.\\
-	http://w3.pppl.gov/~wwlee/\\
-	This course contains the background information on gyrokinetic model that is being used to describe the plasma boundary physics in the ITER Tokamak reactor. \\
-	Project Description\\
-	The project proposal from the Partnership Center for High-Fidelity Boundary Plasma Simulation provides the motivation for performing this research, as well as a reference list containing relevant literature that will be reviewed and cited as necessary. \\
-	
-	XCG User Handbook - This online handbook provides preliminary information to understand how to use the XCG simualtion software. There is contact information available to constanct managing code users/developers.
-
-\item[Scaling Relationship Beween Ion Heat Diffusivity, $\chi_i$, and Dimensionless Radius $\rho* = \rho_i/a$]\hfill
-
-Two articles are cited in the literature when referring to scaling arguments between plasma ion heat diffusion and $\rho*$. Both articles provide a lot of clairty to the nature of the scaling parameters that are affiliated with heat diffusion.\\
-Non-Dimensional scaling of turbulence characteristics and turbulent diffusivity - G.R. McGee et al.\\
-Gyroradius Scaling of Electron and Ion Transport - C.C. Petty et al\\
-
-\item[Prior Research in the Scaling Relationship Between $\chi_i$ and $\rho^*$]\hfill
-Yasuhiro Idomura and Motoki Nakata has completed research in this field, analyzing the relationship between plasma size and ion temperature gradient driven turbulence. This scan was taken over sections comprised of 1/6 of the tokamak, with periodic boundary conditions. 
-
-\subsection*{Numerical Methodology}
-The mathematical component of my Master's of Integrated science will be fulfilled in this thesis through applications of numerical methods in accurate PDE model simulation, uncertainty quantification, surrogate model construction, and exact model validation.
-\item[Uncertainty Quantification] \hfill
-
-Ralph C. Smith - Uncertainty Quantification\\
-Ralph C. Smith has written an introductory textbook on uncertainty quantification that provides useful models, examples and problems to guide the educational and experimental components of this thesis. The texbook has all of the background knowledge necessary to develop a toy surrogate model as proposed in this document.\\  
-
-\item[Sparse Grids]
-\item[Machine Learning]
-\item[Case Study to Understand Current Methods in Uncertainty Quantification]\hfill
-
-I am currently reviewing a paper referenced from the project proposal titled “Improved profile fitting and quantification of uncertainty in experimental measurements of impurity transport coefficients using Gaussian process regression” by Chilenski et al. to develop an understanding of the uncertainty quantification and parameter estimation pipeline.
-
-\item[General Probability and Statistics]\hfill
-
-Performing this work requires a base understanding in probability, Bayesian statistics, and data reduction and error analysis. The following textbooks have been identified to provide a base level of understanding of these topics.\\
-Data Reduction and Error Analysis for the Physical Sciences - Philip R. Bevington,  D. Keih Robinson  - This textbook contains introductory methodology in data reduction, error analysis, probability, and statistics, with plenty of useful examples.\\
-Data Analysis - A Bayesian Tutorial by  D.S. Sivia - This is an introductory textbook in Bayesian statistics, which will be employed throughout this project.\\
-
-\item[Textbooks]\hfill
-\begin{enumerate}
-\item Plasma Physics and Fusion Energy by Jeffrey Friedberg\\
-\item Plasma Modeling Methods and Applications\\
-\item Uncertainty Quantification: Theory, Implementation, and Applications by Ralph C. Smith\\
-\item Data Analysis - A Bayesian Tutorial by  D.S. Sivia\\
-\item Data Reduction and Error Analysis for the Physical Sciences by Phillip R. Bevington and D. Keith Robinson\\
-\end{enumerate}
-
-\item[Articles] 
-\begin{enumerate}
-\end{enumerate}
-\end{description}
-
-%\section{Literature Review for MIS Thesis Proposal}
-%\subsection{Numerical Methods}
-%\begin{description}
-%	\item[Uncertainty Quantification \& Surrogate Models]
-
-%\
-%\end{description}
-%\subsection{Physics}
-%\begin{description}
-%An understanding of general plasma physics, tokamak reactor design, and plasma behavior withing a tokamak reactor, is required to complete this project. Understanding plasma behavior inside a tokamak reactor means understanding the 5-D gyrokinetic model for plasma behavior.  I have identified the following references to support my learning of the aforementioned physics.\\
-%Jeffrey P. Friedberg – Plasma Physics and Fusion Energy\\
-%This textbook covers the physics of plasma fusion, its applications as an energy sources, the physical requirements to create an energy producing fusion reactor, and the designs requirements for fusion reactor with a toroidal geometry - the geometry of the ITER fusion reactor.\\
-%Plasma Modeling Methods and Applications\\
-%This is a modern textbook that covers kinetic theory plasma models, fluid equations and hybrid plasma models, and applications of these models. Each model is developed from first principles, making this an invaluable source for understanding the 5-D gyrokinetic model, as well as a good source for the developing and implementing the models that were discussed in the educational section of this proposal
-%Dr. Wei-Li Gyrokinetic Plasma Simulation\\
-%Dr. Wei-Li from the Princeton Plasma Fusion Physics Laboratory has posted the lecture notes and homework assignments from a course on “Theory and Modeling of Kinetic Plasmas” on his website.\\
-%http://w3.pppl.gov/~wwlee/.\\
-%This course contains the background information on the gyrokinetic model that is being used to describe the plasma boundary physics in the ITER Tokamak reactor.\\
-%Project Description\\
-%The project proposal from the Partnership Center for High-Fidelity Boundary Plasma Simulation provides the motivation for performing this research, as well as a reference list containing relevant literature that will be reviewed and cited as necessary.\\
-%\begin{enumerate}
-%	\item[Uncertainty Quantification: Theory, Implementation, and Applications by Ralph C. Smith]
-%	\item[Data Reduction and Error Analysis for the Physical Sciences by Phillip R. Bevington and D. Keith Robinson]
-%\end{enumerate}
-%\end{description}
-
-\newpage
-%% Bibliography Start
-\bibliographystyle{ieeetr}
-\bibliography{Bibli}
-\end{document}
-%%
-%@book{J_Friedberg:1,
-%	address = {New York},
-%	edition = {1st},
-%	title = {Plasma {Physics} and {Fusion} {Energy}},
-%	isbn = {978-0-511-27375-9},
-%	language = {English},
-%	publisher = {Cambridge University Press},
-%	author = {{Jeffrey P. Friedberg}},
-%	year = {2007}
-%}
-%
-%@book{carl_edward_rasmussen_gaussian_2006,
-%	title = {Gaussian {Processes} for {Machine} {Learning}},
-%	isbn = {0-262-18253-X},
-%	language = {English},
-%	publisher = {MIT Press},
-%	author = {{Carl Edward Rasmussen} and {Christopher K.I. Williams}},
-%	year = {2006},
-%	file = {Gaussian Processes for Machine Learning.pdf:C\:\\Users\\EvanD\\OneDrive\\Documents\\MIS Thesis\\Papers and Textbooks\\Gaussian Processes for Machine Learning.pdf:application/pdf}
-%}
-%
-%@misc{PPPL_P:2,
-%	title = {Partnership {Center} for {High}-{Fidelity} {Boundary} {Plasma} {Simulation} {Project} {Proposal}},
-%	language = {English},
-%	publisher = {Princeton},
-%	author = {{Choong-Seock Chang et al}},
-%	year = {2017}
-%}
-%
-%
-%
-%@article{m.a._chilenski_et_al_improved_2015,
-%	title = {Improved profile fitting and quantification of uncertainty in experimental measurements of impurity transport coefficients using {Gaussian} process regression},
-%	volume = {55},
-%	number = {023012},
-%	journal = {Nucl. Fusion},
-%	author = {{M.A. Chilenski et al}},
-%	year = {2015},
-%	pages = {21},
-%	file = {UQ_Impurity_Transport_Coefficients_GCR_Chilenski.pdf:C\:\\Users\\EvanD\\OneDrive\\Documents\\MIS Thesis\\Papers and Textbooks\\UQ_Impurity_Transport_Coefficients_GCR_Chilenski.pdf:application/pdf}
-%}
-%
-%@techreport{benjamin_peherstorfer_survey_2016,
-%	title = {{SURVEY} {OF} {MULTIFIDELITY} {METHODS} {IN} {UNCERTAINTY} {PROPAGATION}, {INFERENCE}, {AND} {OPTIMIZATION}},
-%	url = {http://web.mit.edu/pehersto/www/preprints/multi-fidelity-survey-peherstorfer-willcox-gunzburger.pdf},
-%	institution = {MIT.edu},
-%	author = {{Benjamin Peherstorfer} and {Karen Willcox} and {Max Gunzburger}},
-%	month = jun,
-%	year = {2016},
-%	pages = {57},
-%	file = {multi-fidelity-survey-peherstorfer-willcox-gunzburger.pdf:C\:\\Users\\EvanD\\OneDrive\\Documents\\MIS Thesis\\Papers and Textbooks\\multi-fidelity-survey-peherstorfer-willcox-gunzburger.pdf:application/pdf}
-%}
-%@book{Smith_UQ:3,
-%	title ={Uncertinaty Quantification - Theory, Implementation, and Applications},
-%	isbn = {978-1-611973-21-1},
-%	language = {English},
-%	publisher = {Society of Industrial and Applied Mathematics},
-%	author = {Ralph C. Smith},
-%	year = {2014}
-%}
 
